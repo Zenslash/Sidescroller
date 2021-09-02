@@ -50,11 +50,11 @@ ExportedObj/
 *.asset
 *.meta
 *.preset
-.Assets/Resources/
+.Resources/
 .Temp/
 .Logs/
-.Assets/Settings/
-.Assets/Scenes/
+.Settings/
+.Scenes/
 .Packages/
 .UserSettings/
 .Library/
