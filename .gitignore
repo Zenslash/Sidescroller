@@ -58,6 +58,7 @@ ExportedObj/
 .Packages/
 .UserSettings/
 .Library/
+.Materials/
 
 # Unity3D generated file on crash reports
 sysinfo.txt
