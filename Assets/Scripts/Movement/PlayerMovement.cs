@@ -8,17 +8,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float playerSpeed = 3f;
     [SerializeField] private int playerIndex = 0;
 
-    private CharacterController _characterController;
+    private CharacterController characterController;
 
-    private Vector3 _moveDirection = Vector3.zero;
-    private Vector2 _inputVector = Vector2.zero;
-    private Vector3 _velocity = Vector3.zero;
+    private Vector3 moveDirection = Vector3.zero;
+    private Vector2 inputVector = Vector2.zero;
+    private Vector3 velocity = Vector3.zero;
 
-    private float _gravity = Physics.gravity.y;
+    private float gravity = Physics.gravity.y;
     private void Awake()
     {
 
-        _characterController = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
     }
     
     public int GetPlayerIndex()
@@ -29,22 +29,23 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetInputVector(Vector2 inputVector)
     {
-        _inputVector = inputVector;
+        inputVector = inputVector;
     }
 
     
     void Update()
     {
         
-        _moveDirection = new Vector3(_inputVector.x, 0, _inputVector.y);
-        if (_moveDirection != Vector3.zero)
+        moveDirection = new Vector3(inputVector.x, 0, inputVector.y);
+        if (moveDirection != Vector3.zero)
         {
-            _characterController.Move(_moveDirection * playerSpeed * Time.deltaTime);
+            characterController.Move(moveDirection * playerSpeed * Time.deltaTime);
         }
-        _velocity.y += _gravity * Time.deltaTime;
-        _characterController.Move(_velocity * Time.deltaTime);
-        if (_characterController.isGrounded && _velocity.y < 0){
-            _velocity.y = 0f;
+        velocity.y += gravity * Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
+        if (characterController.isGrounded && velocity.y < 0)
+        {
+            velocity.y = 0f;
         }
     }
 }
