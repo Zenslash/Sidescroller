@@ -50,6 +50,7 @@ ExportedObj/
 *.asset
 *.meta
 *.preset
+*.prefab
 Resources
 Temp
 Logs
