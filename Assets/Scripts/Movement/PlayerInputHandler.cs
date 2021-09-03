@@ -7,20 +7,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    private PlayerInput _playerInput;
-    private PlayerMovement _playerMovement;
+    private PlayerInput playerInput;
+    private PlayerMovement playerMovement;
 
     private void Awake()
     {
-        _playerInput = GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>();
         var playersMovement = FindObjectsOfType<PlayerMovement>();
-        var index = _playerInput.playerIndex;
-        _playerMovement = playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
+        var index = playerInput.playerIndex;
+        playerMovement = playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log(_playerInput.playerIndex);
-        _playerMovement.SetInputVector(context.ReadValue<Vector2>());
+        Debug.Log(playerInput.playerIndex);
+        playerMovement.SetInputVector(context.ReadValue<Vector2>());
     }
 }
