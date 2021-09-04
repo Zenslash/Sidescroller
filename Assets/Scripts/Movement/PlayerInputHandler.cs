@@ -29,18 +29,17 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnCrouch(InputAction.CallbackContext context)
     {
-        //Debug.Log(context.ReadValueAsObject());
         Debug.Log("OnCrouch triggered");
     }
     
     public void OnInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("OnInteract");
+        Debug.Log("OnInteract triggered");
     }
     
     public void OnStairsMoveUp(InputAction.CallbackContext context)
     {
-        Debug.Log("OnStairMoveUp triggered");
+        playerMovement.SetStairsButton(context.ReadValueAsButton());
     }
 
     public void OnStairsMoveDown(InputAction.CallbackContext context)
