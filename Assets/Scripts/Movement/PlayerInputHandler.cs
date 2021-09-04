@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerInputHandler : MonoBehaviour
 {
@@ -20,7 +21,31 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log(playerInput.playerIndex);
-        playerMovement.SetInputVector(context.ReadValue<Vector2>());
+        //Debug.Log("OnMove triggered");
+        Debug.Log(context.ReadValue<Vector2>());
+        playerMovement.SetInputVector(new Vector2(context.ReadValue<Vector2>().x, 0));
+
     }
+
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        //Debug.Log(context.ReadValueAsObject());
+        Debug.Log("OnCrouch triggered");
+    }
+    
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        Debug.Log("OnInteract");
+    }
+    
+    public void OnStairsMoveUp(InputAction.CallbackContext context)
+    {
+        Debug.Log("OnStairMoveUp triggered");
+    }
+
+    public void OnStairsMoveDown(InputAction.CallbackContext context)
+    {
+        Debug.Log("OnStairMoveDown triggered");
+    }
+    
 }
