@@ -27,9 +27,9 @@ public class PlayerMovement : MonoBehaviour
         return playerIndex;
     }
 
-    public void SetInputVector(Vector2 inputVector)
+    public void SetInputVector(Vector2 playerInputVector)
     {
-        inputVector = inputVector;
+        inputVector = playerInputVector;
     }
 
     
