@@ -52,6 +52,12 @@ ExportedObj/
 *.preset
 *.prefab
 *.inputactions
+
+# 3D models and texturers
+*.fbx
+*.png
+*.mat
+
 Resources
 Temp
 Logs
