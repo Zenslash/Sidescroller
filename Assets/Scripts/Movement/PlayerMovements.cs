@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovements : MonoBehaviour
 {
     [SerializeField] private float playerSpeed = 3f;
     [SerializeField] private int playerIndex = 0;
@@ -14,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private Vector2 inputVector = Vector2.zero;
     private Vector3 velocity = Vector3.zero;
-    private bool stairsInput = false;
+
+    private bool isDisplaced = false;
     
     private void Awake()
     {
@@ -32,24 +33,19 @@ public class PlayerMovement : MonoBehaviour
         inputVector = playerInputVector;
     }
     
-    public void SetStairsButton(bool input)
-    {
-        stairsInput = input;
-    }
 
     public void MoveToStairs()
     {
-        if (stairsInput)
+        if (inputVector.y > 0.8f && !isDisplaced)
         {
             GetComponent<Transform>().Translate(new Vector3(0, 0, 2.0f));
-            stairsInput = false;
+            isDisplaced = !isDisplaced;
+        }
+        if (inputVector.y < -0.8f && isDisplaced)
+        {
+            GetComponent<Transform>().Translate(new Vector3(0, 0, -2.0f));
+            isDisplaced = !isDisplaced;
         }    
-    }
-
-    public void MoveFromStairs()
-    {
-        Debug.Log("Move from Stairs");
-        GetComponent<Transform>().Translate(new Vector3(0, 0, -2.0f));
     }
     
     void FixedUpdate()

@@ -7,11 +7,6 @@ public class StairsEnterTigger : MonoBehaviour
 {
     private void OnTriggerStay(Collider other)
     {
-        other.GetComponent<PlayerMovement>().MoveToStairs();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        other.GetComponent<PlayerMovement>().SetStairsButton(false);
+        other.GetComponent<PlayerMovements>().MoveToStairs();
     }
 }

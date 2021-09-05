@@ -9,21 +9,20 @@ using UnityEngine.UI;
 public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private PlayerMovement playerMovement;
+    private PlayerMovements playerMovement;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        var playersMovement = FindObjectsOfType<PlayerMovement>();
+        var playersMovement = FindObjectsOfType<PlayerMovements>();
         var index = playerInput.playerIndex;
         playerMovement = playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        //Debug.Log("OnMove triggered");
         Debug.Log(context.ReadValue<Vector2>());
-        playerMovement.SetInputVector(new Vector2(context.ReadValue<Vector2>().x, 0));
+        playerMovement.SetInputVector(context.ReadValue<Vector2>());
 
     }
 
@@ -36,15 +35,4 @@ public class PlayerInputHandler : MonoBehaviour
     {
         Debug.Log("OnInteract triggered");
     }
-    
-    public void OnStairsMoveUp(InputAction.CallbackContext context)
-    {
-        playerMovement.SetStairsButton(context.ReadValueAsButton());
-    }
-
-    public void OnStairsMoveDown(InputAction.CallbackContext context)
-    {
-        Debug.Log("OnStairMoveDown triggered");
-    }
-    
 }
