@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 118926485}
   - component: {fileID: 118926484}
   - component: {fileID: 118926486}
+
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Untagged
@@ -239,6 +240,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 118926483}
   m_Enabled: 1
   m_EditorHideFlags: 0
+
   m_Script: {fileID: 11500000, guid: 700fc7030a0398341832732f25c9f92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -349,6 +351,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 214776925}
   m_Enabled: 1
   m_EditorHideFlags: 0
+
   m_Script: {fileID: 11500000, guid: 49d2034271aed1348b12830c25431567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -365,6 +368,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 3.0218441}
   m_Center: {x: 0, y: 0, z: 1.0109221}
+
 --- !u!1 &552049334
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +382,7 @@ GameObject:
   - component: {fileID: 552049336}
   - component: {fileID: 552049335}
   - component: {fileID: 552049339}
+
   - component: {fileID: 552049340}
   m_Layer: 0
   m_Name: Player
@@ -475,6 +480,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 700fc7030a0398341832732f25c9f92b, type: 3}
+
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 3
