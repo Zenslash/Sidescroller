@@ -20,14 +20,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TMP_InputField ipAddressField;
     [SerializeField] private Button joinButton;
 
-    [Header("Event")]
-    [SerializeField] private GameEvent joiGameEvent;
-    [SerializeField] private GameEvent backEvent;
-
-    private void Awake()
-    {
-        joinButton.onClick.AddListener(OnJoinLobbyClick);
-    }
 
     public void OnMainMenuPlayPressed()
     {
@@ -83,7 +75,7 @@ public class MenuManager : MonoBehaviour
     }
 
 
-    private void OnJoinLobbyClick()
+    public void OnJoinJoinPressed()
     {
         string ipAddress = ipAddressField.text;
 
@@ -91,6 +83,11 @@ public class MenuManager : MonoBehaviour
         networkManager.StartClient();
 
         joinButton.interactable = false;
+    }
+    public void OnJoinBackPressed()
+    {
+        ToggleJoinGame();
+        TogglePlay();
     }
 
     public void HandleClientConnect()
