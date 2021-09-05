@@ -9,26 +9,38 @@ using UnityEngine.UI;
 public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private PlayerMovements playerMovement;
+    private PlayerMovements playerMovements;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         var playersMovement = FindObjectsOfType<PlayerMovements>();
         var index = playerInput.playerIndex;
-        playerMovement = playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
+        playerMovements = playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log(context.ReadValue<Vector2>());
-        playerMovement.SetInputVector(context.ReadValue<Vector2>());
-
+        if (playerMovements != null)
+        {
+            playerMovements.SetInputVector(context.ReadValue<Vector2>());
+        }
     }
 
-    public void OnCrouch(InputAction.CallbackContext context)
+    public void OnDisplace(InputAction.CallbackContext context)
     {
-        Debug.Log("OnCrouch triggered");
+        if (playerMovements != null) //context.phase == InputActionPhase.Started)
+        {
+            if(context.started){
+                playerMovements.SetDisplaceInput(true);
+            }
+
+            if (context.canceled)
+            {
+                playerMovements.SetDisplaceInput(false);
+            }
+            
+        }
     }
     
     public void OnInteract(InputAction.CallbackContext context)
