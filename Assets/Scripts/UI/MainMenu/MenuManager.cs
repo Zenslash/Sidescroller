@@ -94,7 +94,8 @@ public class MenuManager : MonoBehaviour
     {
         joinButton.interactable = true;
 
-        ToggleJoinGame();
+        JoinGameGroup.alpha = 0f;
+        JoinGameGroup.blocksRaycasts = false;
     }
     public void HandleClientDisconnect()
     {
