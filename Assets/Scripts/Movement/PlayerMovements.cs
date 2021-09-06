@@ -49,13 +49,13 @@ public class PlayerMovements : MonoBehaviour
                 rigidBody.useGravity = false;
                 isOnLadder = true;
                 var newXCoord = ladderPosition - transform.position.x;
-                localTransform.Translate(new Vector3(newXCoord, 0, 2.0f));
+                localTransform.Translate(new Vector3(newXCoord, 0, 2.0f), Space.World);
             }
             else if (isDisplaced)
             {
                 rigidBody.useGravity = true;
                 isOnLadder = false;
-                localTransform.Translate(new Vector3(0, 0, -2.0f));
+                localTransform.Translate(new Vector3(0, 0, -2.0f), Space.World);
             }
             isDisplaced = !isDisplaced;
             displaceButton = false;
@@ -67,11 +67,11 @@ public class PlayerMovements : MonoBehaviour
         {
             if (!isDisplaced)
             {
-               localTransform.Translate(new Vector3(0, 0, 2.0f));
+               localTransform.Translate(new Vector3(0, 0, 2.0f), Space.World);
             }
             else if (isDisplaced)
             {
-                localTransform.Translate(new Vector3(0, 0, -2.0f));
+                localTransform.Translate(new Vector3(0, 0, -2.0f), Space.World);
             }
             isDisplaced = !isDisplaced;
             displaceButton = false;
