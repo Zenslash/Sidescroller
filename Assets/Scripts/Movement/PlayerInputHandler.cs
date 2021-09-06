@@ -29,7 +29,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnDisplace(InputAction.CallbackContext context)
     {
-        if (playerMovements != null) //context.phase == InputActionPhase.Started)
+        if (playerMovements != null)
         {
             if(context.started){
                 playerMovements.SetDisplaceInput(true);

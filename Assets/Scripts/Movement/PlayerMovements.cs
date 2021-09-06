@@ -12,14 +12,16 @@ public class PlayerMovements : MonoBehaviour
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector2 inputVector = Vector2.zero;
-    private Vector3 velocity = Vector3.zero;
 
     private bool displaceButton = false;
     private bool isDisplaced = false;
     private bool isOnLadder = false;
+
+    private Transform localTransform;
     
     private void Awake()
     {
+        localTransform = GetComponent<Transform>();
         rigidBody = GetComponent<Rigidbody>();
     }
     
@@ -46,14 +48,14 @@ public class PlayerMovements : MonoBehaviour
             {
                 rigidBody.useGravity = false;
                 isOnLadder = true;
-                var NewXCoord = ladderPosition - transform.position.x;
-                GetComponent<Transform>().Translate(new Vector3(NewXCoord, 0, 2.0f));
+                var newXCoord = ladderPosition - transform.position.x;
+                localTransform.Translate(new Vector3(newXCoord, 0, 2.0f));
             }
             else if (isDisplaced)
             {
                 rigidBody.useGravity = true;
                 isOnLadder = false;
-                GetComponent<Transform>().Translate(new Vector3(0, 0, -2.0f));
+                localTransform.Translate(new Vector3(0, 0, -2.0f));
             }
             isDisplaced = !isDisplaced;
             displaceButton = false;
@@ -65,11 +67,11 @@ public class PlayerMovements : MonoBehaviour
         {
             if (!isDisplaced)
             {
-                GetComponent<Transform>().Translate(new Vector3(0, 0, 2.0f));
+               localTransform.Translate(new Vector3(0, 0, 2.0f));
             }
             else if (isDisplaced)
             {
-                GetComponent<Transform>().Translate(new Vector3(0, 0, -2.0f));
+                localTransform.Translate(new Vector3(0, 0, -2.0f));
             }
             isDisplaced = !isDisplaced;
             displaceButton = false;
@@ -86,8 +88,9 @@ public class PlayerMovements : MonoBehaviour
         { 
             moveDirection = new Vector3(inputVector.x * playerSpeed, 0, 0);
         }
+
         rigidBody.MovePosition(transform.position + moveDirection * Time.deltaTime);
-        
+
 
     }
 

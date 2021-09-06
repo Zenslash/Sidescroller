@@ -10,6 +10,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AF218701-FE32-4032-B521-DDD91F13662B/a1/be7de49c/Transform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
@@ -18,9 +26,11 @@
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovement.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/OnStairsTrigger.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsEnterTigger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/LadderTriger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1xiQgljmbCk5xEciREFCuqpcI5N" />
@@ -33,6 +43,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -65,7 +76,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1630835545416</updated>
-      <workItem from="1630835576885" duration="11413000" />
+      <workItem from="1630835576885" duration="11520000" />
+      <workItem from="1630919058596" duration="3517000" />
     </task>
     <servers />
   </component>
