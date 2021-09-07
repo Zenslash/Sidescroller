@@ -74,7 +74,7 @@ public class PlayerInputHandler : MonoBehaviour
                 direction = new Vector3(100, 100) * context.ReadValue<Vector2>();           
                 break;
             case KEYMOUSE:
-                //TODO ZIS SHIET
+                //TODO ZIS
                 break;
                 
         }
