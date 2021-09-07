@@ -6,18 +6,27 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+
+
 public class PlayerInputHandler : MonoBehaviour
 {
-    private UnityEngine.InputSystem.PlayerInput playerInput;
+    const string KEYMOUSE = "Keyboard and mouse";
+    const string GAMEPAD = "Gamepad";
+
+
+    private PlayerInput playerInput;
     private PlayerMovements playerMovements;
- 
+    private PlayerStatsManager playerStatsManager;
+
+
     private void Awake()
     {
-        playerInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
-        var playersMovement = FindObjectsOfType<PlayerMovements>();
+        playerInput = GetComponent<PlayerInput>();
+        var playersManagers = FindObjectsOfType<PlayerStatsManager>();
         var index = playerInput.playerIndex;
-        playerMovements = playersMovement.FirstOrDefault(player => player.GetID() == index);
-        
+        playerStatsManager = playersManagers.FirstOrDefault(player => player.Movements.GetPlayerIndex() == index);  //playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
+        playerMovements = playerStatsManager.Movements;
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -40,12 +49,36 @@ public class PlayerInputHandler : MonoBehaviour
             {
                 playerMovements.SetDisplaceInput(false);
             }
-            
+
         }
     }
-    
+
     public void OnInteract(InputAction.CallbackContext context)
     {
         Debug.Log("OnInteract triggered");
     }
+
+
+    public void OnAiming(InputAction.CallbackContext context)
+    {
+        playerStatsManager.Attack.Aim(context.performed);
+
+    }
+
+    public void OnSight(InputAction.CallbackContext context)
+    {
+        Vector3 direction = Vector2.zero;
+        switch (playerInput.currentControlScheme)
+        {
+            case GAMEPAD:
+                direction = new Vector3(100, 100) * context.ReadValue<Vector2>();
+                break;
+            case KEYMOUSE:
+                //TODO ZIS
+                break;
+
+        }
+        playerStatsManager.Attack.Sight = direction;
+    }
+
 }
