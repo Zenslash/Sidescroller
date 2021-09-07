@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovements : MonoBehaviour
 {
-    [SerializeField] private float playerSpeed = 3f;
-    [SerializeField] private int playerIndex = 0;
+    [SerializeField] private float playerSpeed = 3f; 
+    
+    private int localID = 0;
+    private static int globalID = 0;
 
     private Rigidbody rigidBody;
 
@@ -18,16 +21,18 @@ public class PlayerMovements : MonoBehaviour
     private bool isOnLadder = false;
 
     private Transform localTransform;
-    
+
     private void Awake()
     {
+        localID = globalID;
+        globalID++;
         localTransform = GetComponent<Transform>();
         rigidBody = GetComponent<Rigidbody>();
     }
     
-    public int GetPlayerIndex()
+    public int GetID()
     {
-        return playerIndex;
+        return localID;
     }
 
     public void SetDisplaceInput(bool buttonInput)
@@ -40,6 +45,11 @@ public class PlayerMovements : MonoBehaviour
         inputVector = playerInputVector;
     }
 
+    public Vector2 GetInputVector()
+    {
+        return inputVector;
+    }
+
     public void MoveToLadder(float ladderPosition)
     {
         if (displaceButton)
@@ -49,13 +59,13 @@ public class PlayerMovements : MonoBehaviour
                 rigidBody.useGravity = false;
                 isOnLadder = true;
                 var newXCoord = ladderPosition - transform.position.x;
-                localTransform.Translate(new Vector3(newXCoord, 0, 2.0f));
+                localTransform.Translate(new Vector3(newXCoord, 0, 2.0f), Space.World);
             }
             else if (isDisplaced)
             {
                 rigidBody.useGravity = true;
                 isOnLadder = false;
-                localTransform.Translate(new Vector3(0, 0, -2.0f));
+                localTransform.Translate(new Vector3(0, 0, -2.0f), Space.World);
             }
             isDisplaced = !isDisplaced;
             displaceButton = false;
@@ -67,11 +77,11 @@ public class PlayerMovements : MonoBehaviour
         {
             if (!isDisplaced)
             {
-               localTransform.Translate(new Vector3(0, 0, 2.0f));
+               localTransform.Translate(new Vector3(0, 0, 2.0f), Space.World);
             }
             else if (isDisplaced)
             {
-                localTransform.Translate(new Vector3(0, 0, -2.0f));
+                localTransform.Translate(new Vector3(0, 0, -2.0f), Space.World);
             }
             isDisplaced = !isDisplaced;
             displaceButton = false;
@@ -88,7 +98,9 @@ public class PlayerMovements : MonoBehaviour
         { 
             moveDirection = new Vector3(inputVector.x * playerSpeed, 0, 0);
         }
-
+        Debug.Log(inputVector + " inputVector");
+        Debug.Log(moveDirection + " moveDirection");
+        
         rigidBody.MovePosition(transform.position + moveDirection * Time.deltaTime);
 
 

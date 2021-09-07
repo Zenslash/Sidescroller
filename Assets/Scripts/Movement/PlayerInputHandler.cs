@@ -8,15 +8,16 @@ using UnityEngine.UI;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    private PlayerInput playerInput;
+    private UnityEngine.InputSystem.PlayerInput playerInput;
     private PlayerMovements playerMovements;
-
+ 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
+        playerInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
         var playersMovement = FindObjectsOfType<PlayerMovements>();
         var index = playerInput.playerIndex;
-        playerMovements = playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
+        playerMovements = playersMovement.FirstOrDefault(player => player.GetID() == index);
+        
     }
 
     public void OnMove(InputAction.CallbackContext context)

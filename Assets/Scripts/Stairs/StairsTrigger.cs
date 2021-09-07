@@ -14,8 +14,11 @@ public class StairsTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        playerMovements.MoveToStairs();
-    }
+        if (playerMovements != null)
+        {
+            playerMovements.MoveToStairs();
+        }
+}
 
 
 }
