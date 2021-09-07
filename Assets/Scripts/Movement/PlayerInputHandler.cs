@@ -6,17 +6,27 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+
+
 public class PlayerInputHandler : MonoBehaviour
 {
+    const string KEYMOUSE = "Keyboard and mouse";
+    const string GAMEPAD = "Gamepad";
+
+
     private PlayerInput playerInput;
     private PlayerMovements playerMovements;
+    private PlayerStatsManager playerStatsManager;
+    
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        var playersMovement = FindObjectsOfType<PlayerMovements>();
+        var playersManagers = FindObjectsOfType<PlayerStatsManager>();
         var index = playerInput.playerIndex;
-        playerMovements = playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
+        playerStatsManager = playersManagers.FirstOrDefault(player => player.Movements.GetPlayerIndex() == index);  //playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
+        playerMovements = playerStatsManager.Movements;
+        
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -47,4 +57,28 @@ public class PlayerInputHandler : MonoBehaviour
     {
         Debug.Log("OnInteract triggered");
     }
+
+
+    public void OnAiming(InputAction.CallbackContext context)
+    {
+        playerStatsManager.Attack.Aim(context.performed);
+        
+    }
+
+    public void OnSight(InputAction.CallbackContext context)
+    {
+        Vector3 direction = Vector2.zero;
+        switch (playerInput.currentControlScheme)
+        {
+            case GAMEPAD:
+                direction = new Vector3(100, 100) * context.ReadValue<Vector2>();           
+                break;
+            case KEYMOUSE:
+                //TODO ZIS SHIET
+                break;
+                
+        }
+        playerStatsManager.Attack.Sight = direction;
+    }
+
 }
