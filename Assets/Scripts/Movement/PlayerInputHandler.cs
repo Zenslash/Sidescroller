@@ -24,7 +24,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         var playersManagers = FindObjectsOfType<PlayerStatsManager>();
         var index = playerInput.playerIndex;
-        playerStatsManager = playersManagers.FirstOrDefault(player => player.Movements.GetPlayerIndex() == index);  //playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
+        playerStatsManager = playersManagers.FirstOrDefault(player => player.Movements.GetID() == index);  //playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
         playerMovements = playerStatsManager.Movements;
 
     }
@@ -61,6 +61,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnAiming(InputAction.CallbackContext context)
     {
+        //Debug.Log(context.control); НЕ УДАЛЯТЬ БЕЗ ЭТОГО КОММЕНТА ВЫЛЕТАЕТ NULLREFERENCEEXCEPTION 
+        //Debug.Log(context.control.device == InputDevice(GAMEPAD));
         playerStatsManager.Attack.Aim(context.performed);
 
     }
@@ -68,6 +70,10 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnSight(InputAction.CallbackContext context)
     {
         Vector3 direction = Vector2.zero;
+        if (playerInput == null)
+        {
+            return;
+        }
         switch (playerInput.currentControlScheme)
         {
             case GAMEPAD:

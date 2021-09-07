@@ -98,8 +98,8 @@ public class PlayerMovements : MonoBehaviour
         { 
             moveDirection = new Vector3(inputVector.x * playerSpeed, 0, 0);
         }
-        Debug.Log(inputVector + " inputVector");
-        Debug.Log(moveDirection + " moveDirection");
+        //Debug.Log(inputVector + " inputVector");
+        //Debug.Log(moveDirection + " moveDirection");
         
         rigidBody.MovePosition(transform.position + moveDirection * Time.deltaTime);
 

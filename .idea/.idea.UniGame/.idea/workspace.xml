@@ -21,6 +21,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AF218701-FE32-4032-B521-DDD91F13662B/a1/be7de49c/Transform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PlayerStatsManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -30,9 +31,9 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsEnterTigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/LadderTriger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1xiQgljmbCk5xEciREFCuqpcI5N" />
@@ -41,7 +42,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.22860238" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.16749585" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -61,10 +62,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="22572">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="5388">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="22572" />
+      <option name="pid" value="5388" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -84,7 +85,7 @@
       <workItem from="1630919058596" duration="4172000" />
       <workItem from="1630927124677" duration="2489000" />
       <workItem from="1630942393611" duration="2429000" />
-      <workItem from="1631003360153" duration="5074000" />
+      <workItem from="1631003360153" duration="9820000" />
     </task>
     <servers />
   </component>
@@ -100,17 +101,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs</url>
-          <line>103</line>
-          <properties documentPath="C:\Users\Leonid\Unity\UniGame\Assets\Scripts\Movement\PlayerMovements.cs" initialLine="101" containingFunctionPresentation="method 'FixedUpdate'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs</url>
+          <line>76</line>
+          <properties documentPath="C:\Users\Leonid\Unity\UniGame\Assets\Scripts\Movement\PlayerInputHandler.cs" initialLine="70" containingFunctionPresentation="method 'OnSight'">
             <startOffsets>
-              <option value="2666" />
+              <option value="2071" />
             </startOffsets>
             <endOffsets>
-              <option value="2742" />
+              <option value="2112" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
