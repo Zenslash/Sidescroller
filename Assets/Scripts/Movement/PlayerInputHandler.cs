@@ -17,7 +17,7 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerMovements playerMovements;
     private PlayerStatsManager playerStatsManager;
-
+    
 
     private void Awake()
     {
