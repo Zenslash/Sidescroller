@@ -17,7 +17,6 @@ public class PlayerFootIK : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
-        Debug.Log("test");
         if (animator != null)
         {
             animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
@@ -26,7 +25,6 @@ public class PlayerFootIK : MonoBehaviour
             animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1f);
 
             RaycastHit hit;
-            Debug.Log(AvatarIKGoal.LeftFoot);
             Ray ray = new Ray(animator.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
             if (Physics.Raycast(ray, out hit, DistnceToGround + 1f, LayerMask))
             {

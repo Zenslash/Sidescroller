@@ -107,7 +107,7 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]private Vector3 currentVelocity;
     void FixedUpdate()
     {
-        
+        Debug.Log(inputVector);
         if (isRunning)
         {
             playerVelocity = new Vector3(inputVector.x * runSpeed, 0, 0);
@@ -126,10 +126,7 @@ public class PlayerMovements : MonoBehaviour
 
         rigidBody.rotation = Quaternion.RotateTowards(transform.rotation, moveRotation, rotationSpeed);
         //rigidBody.velocity = playerVelocity;
-        if (rigidBody.rotation == moveRotation)
-        {
-            rigidBody.MovePosition(transform.position + currentVelocity * Time.deltaTime);
-        }
+        rigidBody.MovePosition(transform.position + currentVelocity * Time.deltaTime);
 
 
         //Debug.Log("test");
