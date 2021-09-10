@@ -11,16 +11,28 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float maxSpreadAngle;
     [SerializeField] private float timeAiming;
     [SerializeField] private float recoilTime;
-    public bool inputtt;
+    [SerializeField] private float recoilPunishTime;
+    [SerializeField] public GameObject Bullet;
+    [SerializeField] private float bulletSpeed;
     #endregion
     [SerializeField] private bool isAiming;
+    [SerializeField] private float currentAngle;
+    
+    public bool CanFire
+    {
+        get 
+        {
+            return Time.time > lastFired;
+        }  
+    }
     [SerializeField] public Vector3 Sight;
     private Coroutine currentAim;
+    private float lastFired;
 
     private void Start()
     {
         isAiming = false;
-
+        
     }
     #region Refactor
     public void Aim(bool state)
@@ -47,36 +59,58 @@ public class PlayerAttack : MonoBehaviour
         isAiming = false;
     }
     #endregion
-    public void Update()
+    public void Fire()
     {
-        
+        if (isAiming && CanFire)
+        {
+            lastFired = Time.time + recoilTime;
+            timeleft += recoilPunishTime;
+            CreateBullet();
+        }
+    }
+
+    private void CreateBullet()
+    {   
+        float directionMistake = currentAngle == 0 ? 0 : Random.Range(-currentAngle, currentAngle);
+        Vector3 directionVector = Quaternion.AngleAxis(directionMistake, Vector3.forward) * Sight.normalized;
+        Quaternion direction = Quaternion.Euler(Vector2.SignedAngle(directionVector, Vector2.right), 90, 0);
+
+        //TODO Replace with objectPooling
+        Rigidbody bullet = Instantiate(Bullet, gunPoiner, direction).GetComponent<Rigidbody>();
+        bullet.velocity = directionVector * bulletSpeed;
 
     }
 
+    /// <summary>
+    /// How much time left until spread is gone
+    /// </summary>
+    private float timeleft;
+   
+
     IEnumerator Aiming()
     {
-        float timeleft = timeAiming;
-        Vector3 Angle1 = Quaternion.AngleAxis(spreadAngle, Vector3.forward) * Sight;
-        Vector3 Angle2 = Quaternion.AngleAxis(spreadAngle, Vector3.back) * Sight;
-        while (timeleft > 0)
-        {
-            //TODO Переписать
-            gunPoiner = transform.position;
+        timeleft = timeAiming;
+        Vector3 Angle1;
+        Vector3 Angle2;
+        while (true)
+        { // i feel great pain
+            timeleft = timeleft > 0 ? timeleft - Time.deltaTime : 0; //TODO fix maxSpread bug
+            currentAngle = (spreadAngle * (timeleft / timeAiming))/2;
+            if (currentAngle * 2 > maxSpreadAngle)
+            {
 
-            
+                currentAngle = maxSpreadAngle / 2;
+            }
+            gunPoiner = transform.position;
+            Angle1 = Quaternion.AngleAxis(currentAngle, Vector3.forward) * Sight;
+            Angle2 = Quaternion.AngleAxis(currentAngle, Vector3.back) * Sight;
+
             Debug.DrawLine(gunPoiner, Angle1);
             Debug.DrawLine(gunPoiner, Angle2);
-            timeleft -= Time.deltaTime;
-            Angle1 = Quaternion.AngleAxis(spreadAngle * (timeleft / timeAiming), Vector3.forward) * Sight;
-            Angle2 = Quaternion.AngleAxis(spreadAngle * (timeleft / timeAiming), Vector3.back) * Sight;
+            
+            
             yield return null;
         }
-        while (true)
-        {
-            //TODO Переписать
-            gunPoiner = transform.position;
-            Debug.DrawLine(gunPoiner, Sight);
-            yield return null;
-        }
+      
     }
 }
