@@ -28,12 +28,21 @@ public class PlayerFootIK : MonoBehaviour
             RaycastHit hit;
             Debug.Log(AvatarIKGoal.LeftFoot);
             Ray ray = new Ray(animator.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
-            if (Physics.Raycast(ray, out hit, DistnceToGround + 1f))
+            if (Physics.Raycast(ray, out hit, DistnceToGround + 1f, LayerMask))
             {
                 Vector3 footPosition = hit.point;
-                footPosition.y -= DistnceToGround;
+                footPosition.y += DistnceToGround;
                 animator.SetIKPosition(AvatarIKGoal.LeftFoot, footPosition);
-                //animator.SetIKRotation(AvatarIKGoal.LeftFoot, footPosition);
+                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward, hit.normal));
+            }
+
+            ray = new Ray(animator.GetIKPosition(AvatarIKGoal.RightFoot) + Vector3.up, Vector3.down);
+            if (Physics.Raycast(ray, out hit, DistnceToGround + 1f, LayerMask))
+            {
+                Vector3 footPosition = hit.point;
+                footPosition.y += DistnceToGround;
+                animator.SetIKPosition(AvatarIKGoal.RightFoot, footPosition);
+                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, hit.normal));
             }
 
 
