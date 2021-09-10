@@ -89,4 +89,10 @@ public class PlayerInputHandler : MonoBehaviour
         playerStatsManager.Attack.Sight = direction;
     }
 
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            playerStatsManager.Attack.Fire();
+    }
+
 }

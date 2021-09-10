@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 74647883}
   - component: {fileID: 74647882}
   - component: {fileID: 74647888}
+  - component: {fileID: 74647889}
   m_Layer: 0
   m_Name: Hero(tipa)
   m_TagString: Untagged
@@ -361,6 +362,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movements: {fileID: 0}
   _attack: {fileID: 0}
+--- !u!114 &74647889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74647881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a200df9f597124db940a55366621f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPoiner: {x: 0, y: 0, z: 0}
+  spreadAngle: 30
+  maxSpreadAngle: 60
+  timeAiming: 4
+  recoilTime: 0.1
+  recoilPunishTime: 1
+  Bullet: {fileID: 1712629296203332680, guid: b5b80bfcdedc00e4798973d1b8a56b48, type: 3}
+  bulletSpeed: 10
+  isAiming: 0
+  currentAngle: 0
+  Sight: {x: 0, y: 0, z: 0}
 --- !u!1001 &285537753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -716,6 +740,7 @@ GameObject:
   - component: {fileID: 1524934367}
   - component: {fileID: 1524934366}
   - component: {fileID: 1524934365}
+  - component: {fileID: 1524934372}
   m_Layer: 0
   m_Name: Hero(tipa) (1)
   m_TagString: Untagged
@@ -844,6 +869,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1524934372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524934364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a200df9f597124db940a55366621f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPoiner: {x: 0, y: 0, z: 0}
+  spreadAngle: 30
+  maxSpreadAngle: 60
+  timeAiming: 4
+  recoilTime: 0.5
+  recoilPunishTime: 0
+  Bullet: {fileID: 0}
+  bulletSpeed: 0
+  isAiming: 0
+  currentAngle: 0
+  Sight: {x: 0, y: 0, z: 0}
 --- !u!1 &1708083514
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,6 +1033,7 @@ GameObject:
   - component: {fileID: 2130827840}
   - component: {fileID: 2130827839}
   - component: {fileID: 2130827842}
+  - component: {fileID: 2130827843}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1089,3 +1138,15 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &2130827843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130827838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dcb76cac213ec04498b8b893a408500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
