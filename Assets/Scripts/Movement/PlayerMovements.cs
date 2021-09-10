@@ -36,6 +36,21 @@ public class PlayerMovements : MonoBehaviour
     }
     public Vector3 GetPlayerVelocity => currentVelocity;
 
+    public float GetMaxSpeed
+    {
+        get
+        {
+            if (IsRunning)
+            {
+                return Mathf.Abs(runSpeed);
+            }
+            else
+            {
+                return Mathf.Abs(walkSpeed);
+            }
+        }
+    }
+
     private void Awake()
     
     {

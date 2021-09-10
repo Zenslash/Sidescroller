@@ -4,10 +4,12 @@
     <list default="true" id="253306d8-2c78-4aa7-9d03-9bf5ed6c7777" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/PlayerInput.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/PlayerInput.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerControls.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerControls.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,10 +42,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsEnterTigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/LadderTriger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1xiQgljmbCk5xEciREFCuqpcI5N" />
@@ -97,7 +99,7 @@
       <workItem from="1630927124677" duration="2489000" />
       <workItem from="1630942393611" duration="2429000" />
       <workItem from="1631003360153" duration="9820000" />
-      <workItem from="1631259271678" duration="13868000" />
+      <workItem from="1631259271678" duration="16644000" />
     </task>
     <servers />
   </component>
