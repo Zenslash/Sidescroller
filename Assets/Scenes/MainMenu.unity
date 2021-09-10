@@ -4598,9 +4598,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 291.34064, y: 167.60439, z: -113.52514}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1694658828}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1577566312
 MonoBehaviour:
@@ -4861,11 +4862,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694658827}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 291.34064, y: 167.60439, z: -113.52514}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1577566311}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1694658829
 MonoBehaviour:
@@ -4922,10 +4923,10 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 0}
-  minPlayers: 2
+  minPlayers: 1
   menuScene: MainMenu
   roomPlayerPrefab: {fileID: 8916480055859023454, guid: 5a17adab4d6fa75428bdd7d7c3d23c4b, type: 3}
-  gamePlayerPrefab: {fileID: 0}
+  gamePlayerPrefab: {fileID: 8929074808234956840, guid: c148fec156b129f4d9f9db8f100345eb, type: 3}
   OnClientConnected: {fileID: 11400000, guid: c018f8d515067f945ab36e9ac13782e4, type: 2}
   OnClientDisconnected: {fileID: 11400000, guid: 751471a1e46fcfd4da4fd66c0d34662b, type: 2}
 --- !u!1 &1894451527

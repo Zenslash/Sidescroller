@@ -17,7 +17,7 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerMovements playerMovements;
     private PlayerStatsManager playerStatsManager;
-    
+
 
     private void Awake()
     {
@@ -69,8 +69,6 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnAiming(InputAction.CallbackContext context)
     {
-        //Debug.Log(context.control); НЕ УДАЛЯТЬ БЕЗ ЭТОГО КОММЕНТА ВЫЛЕТАЕТ NULLREFERENCEEXCEPTION 
-        //Debug.Log(context.control.device == InputDevice(GAMEPAD));
         playerStatsManager.Attack.Aim(context.performed);
 
     }
@@ -78,10 +76,6 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnSight(InputAction.CallbackContext context)
     {
         Vector3 direction = Vector2.zero;
-        if (playerInput == null)
-        {
-            return;
-        }
         switch (playerInput.currentControlScheme)
         {
             case GAMEPAD:

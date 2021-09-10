@@ -21,6 +21,7 @@ public class SNetworkManager : NetworkManager
     [SerializeField] private GameEvent OnClientDisconnected;
 
     public List<SNetworkRoomPlayer> RoomPlayers { get; } = new List<SNetworkRoomPlayer>();
+    public List<SNetworkGamePlayer> GamePlayers { get; } = new List<SNetworkGamePlayer>();
 
     public override void OnClientConnect(NetworkConnection conn)
     {
@@ -100,6 +101,7 @@ public class SNetworkManager : NetworkManager
     public override void OnStopServer()
     {
         RoomPlayers.Clear();
+        GamePlayers.Clear();
     }
 
     public void NotifyPlayersOfReadyState()
@@ -120,6 +122,40 @@ public class SNetworkManager : NetworkManager
         }
 
         return true;
+    }
+
+    public void StartGame()
+    {
+        if(SceneManager.GetActiveScene().name == menuScene)
+        {
+            if(!IsReadyToStart())
+            {
+                return;
+            }
+
+            //TODO Change to custom map
+            ServerChangeScene("Scene_Map_Bunker");
+        }
+    }
+
+    public override void ServerChangeScene(string newSceneName)
+    {
+        // From menu to game
+        if (SceneManager.GetActiveScene().name == menuScene && newSceneName.StartsWith("Scene_Map"))
+        {
+            for (int i = RoomPlayers.Count - 1; i >= 0; i--)
+            {
+                var conn = RoomPlayers[i].connectionToClient;
+                var gameplayerInstance = Instantiate(gamePlayerPrefab);
+                gameplayerInstance.SetDisplayName(RoomPlayers[i].DisplayName);
+
+                NetworkServer.Destroy(conn.identity.gameObject);
+
+                NetworkServer.ReplacePlayerForConnection(conn, gameplayerInstance.gameObject);
+            }
+        }
+
+        base.ServerChangeScene(newSceneName);
     }
 
 }
