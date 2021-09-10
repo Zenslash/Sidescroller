@@ -6,7 +6,7 @@ using UnityEngine;
 public class LadderTriger : MonoBehaviour
 {
     private Transform ladderTransform;
-    private PlayerMovements playerMovements;
+    private PlayerStatsManager playerStatsManager;
     public void Awake()
     {
         ladderTransform = GetComponentInParent<Transform>();
@@ -14,11 +14,11 @@ public class LadderTriger : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        playerMovements = other.GetComponent<PlayerMovements>();
+        playerStatsManager = other.GetComponentInParent<PlayerStatsManager>();
     }
 
     public void OnTriggerStay(Collider other)
     {
-        playerMovements.MoveToLadder(ladderTransform.position.x);
+        playerStatsManager.Movements.MoveToLadder(ladderTransform.position.x);
     }
 }

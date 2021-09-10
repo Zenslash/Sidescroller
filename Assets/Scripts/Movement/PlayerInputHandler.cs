@@ -29,6 +29,14 @@ public class PlayerInputHandler : MonoBehaviour
 
     }
 
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if (playerStatsManager != null)
+        {
+            playerStatsManager.Movements.IsRunning = context.performed;
+        }
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         if (playerMovements != null)

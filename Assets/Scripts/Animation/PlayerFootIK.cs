@@ -1,31 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
-public class PlayerAnimationStateController : MonoBehaviour
+public class PlayerFootIK : MonoBehaviour
 {
-    private PlayerMovements playerMovements;
     private Animator animator;
+    [Range (0,1f)]
+    public float DistnceToGround;
 
+    public LayerMask LayerMask;
     private void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
-        playerMovements = GetComponent<PlayerMovements>();
+        animator = GetComponentInParent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log(AvatarIKGoal.LeftFoot);
-        animator.SetBool("isRunning", playerMovements.IsRunning);
-        animator.SetInteger("Input", Mathf.RoundToInt(playerMovements.GetInputVector().x));
-        animator.SetFloat("Speed", Math.Abs(playerMovements.GetPlayerVelocity.x));
-        
-    }
-
-    /*private void OnAnimatorIK(int layerIndex)
+    private void OnAnimatorIK(int layerIndex)
     {
         Debug.Log("test");
         if (animator != null)
@@ -48,5 +38,5 @@ public class PlayerAnimationStateController : MonoBehaviour
 
 
         }
-    }*/
+    }
 }

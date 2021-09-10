@@ -1,28 +1,43 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerMovements : MonoBehaviour
 {
-    [SerializeField] private float playerSpeed = 3f; 
-    
+    [SerializeField] private float runSpeed = 3f;
+    [SerializeField] private float walkSpeed = 1f;
+    [SerializeField] private float rotationSpeed = 20f;
+
     private int localID = 0;
     private static int globalID = 0;
 
     private Rigidbody rigidBody;
 
-    private Vector3 moveDirection = Vector3.zero;
+    private Vector3 playerVelocity = Vector3.zero;
     private Vector2 inputVector = Vector2.zero;
+    private Quaternion moveRotation;
 
+    private bool isRunning = false;
     private bool displaceButton = false;
     private bool isDisplaced = false;
     private bool isOnLadder = false;
 
     private Transform localTransform;
+    
+    public bool IsRunning
+    {
+        get => isRunning;
+        set => isRunning = value;
+    }
+    public Vector3 GetPlayerVelocity => currentVelocity;
 
     private void Awake()
+    
     {
         localID = globalID;
         globalID++;
@@ -87,22 +102,37 @@ public class PlayerMovements : MonoBehaviour
             displaceButton = false;
         }
     }
-    
+
+    public float TimeVelocity;
+    [SerializeField]private Vector3 currentVelocity;
     void FixedUpdate()
     {
-        if (isOnLadder)
+        
+        if (isRunning)
         {
-            moveDirection = new Vector3(0, inputVector.y * playerSpeed, 0);
+            playerVelocity = new Vector3(inputVector.x * runSpeed, 0, 0);
         }
         else
-        { 
-            moveDirection = new Vector3(inputVector.x * playerSpeed, 0, 0);
+        {
+            playerVelocity = new Vector3(inputVector.x * walkSpeed, 0, 0);
         }
-        //Debug.Log(inputVector + " inputVector");
-        //Debug.Log(moveDirection + " moveDirection");
-        
-        rigidBody.MovePosition(transform.position + moveDirection * Time.deltaTime);
+        currentVelocity = Vector3.Lerp(currentVelocity, playerVelocity, TimeVelocity);
+        currentVelocity.x = Mathf.Abs(currentVelocity.x) < 0.0001 ? 0 :currentVelocity.x;
 
+        if (currentVelocity != Vector3.zero)
+        {
+            moveRotation = Quaternion.LookRotation(new Vector3(0, 0, currentVelocity.x), Vector3.up);
+        }
+
+        rigidBody.rotation = Quaternion.RotateTowards(transform.rotation, moveRotation, rotationSpeed);
+        //rigidBody.velocity = playerVelocity;
+        if (rigidBody.rotation == moveRotation)
+        {
+            rigidBody.MovePosition(transform.position + currentVelocity * Time.deltaTime);
+        }
+
+
+        //Debug.Log("test");
 
     }
 
