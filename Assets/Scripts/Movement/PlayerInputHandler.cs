@@ -69,30 +69,40 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnAiming(InputAction.CallbackContext context)
     {
-        playerStatsManager.Attack.Aim(context.performed);
+        if (playerInput != null)
+        {
+            playerStatsManager.Attack.Aim(context.performed);
+        }
 
     }
 
     public void OnSight(InputAction.CallbackContext context)
     {
-        Vector3 direction = Vector2.zero;
-        switch (playerInput.currentControlScheme)
+        if (playerInput != null)
         {
-            case GAMEPAD:
-                direction = new Vector3(100, 100) * context.ReadValue<Vector2>();
-                break;
-            case KEYMOUSE:
-                //TODO ZIS
-                break;
+            Vector3 direction = Vector2.zero;
 
+            switch (playerInput.currentControlScheme)
+            {
+                case GAMEPAD:
+                    direction = new Vector3(100, 100) * context.ReadValue<Vector2>();
+                    break;
+                case KEYMOUSE:
+                    //TODO ZIS
+                    break;
+            }
+
+            playerStatsManager.Attack.Sight = direction;
         }
-        playerStatsManager.Attack.Sight = direction;
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed)
-            playerStatsManager.Attack.Fire();
+        if (playerInput != null)
+        {
+            if (context.performed)
+                playerStatsManager.Attack.Fire();
+        }
     }
 
 }

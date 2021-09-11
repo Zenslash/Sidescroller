@@ -8,6 +8,7 @@ public class PlayerAnimationStateController : MonoBehaviour
 {
     private PlayerMovements playerMovements;
     private Animator animator;
+    private bool isIdle;
 
     private void Awake()
     {
@@ -18,11 +19,18 @@ public class PlayerAnimationStateController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(AvatarIKGoal.LeftFoot);
         animator.SetBool("isRunning", playerMovements.IsRunning);
         animator.SetInteger("Input", Mathf.RoundToInt(playerMovements.GetInputVector().x));
         animator.SetFloat("Speed", Math.Abs(playerMovements.GetPlayerVelocity.x));
-        
+        if (playerMovements.GetInputVector().x == 0)
+        {
+            animator.speed = 1;
+        }
+        else
+        {
+            animator.speed = Mathf.Abs(playerMovements.GetPlayerVelocity.x) / playerMovements.GetMaxSpeed;
+        }
+
     }
 
     /*private void OnAnimatorIK(int layerIndex)
