@@ -3,10 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="253306d8-2c78-4aa7-9d03-9bf5ed6c7777" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerStatsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerStatsManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/Aiming.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Animations/Aiming.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/NoAiming.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Animations/NoAiming.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Attacking/PlayerAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Attacking/PlayerAttack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +46,14 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/OnStairsTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsEnterTigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/LadderTriger.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
+      <option value="$PROJECT_DIR$/Assets/PlayerStatsManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Attacking/PlayerAttack.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1xiQgljmbCk5xEciREFCuqpcI5N" />

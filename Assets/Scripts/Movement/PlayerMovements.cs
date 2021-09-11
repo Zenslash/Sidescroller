@@ -12,6 +12,8 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField] private float runSpeed = 3f;
     [SerializeField] private float walkSpeed = 1f;
     [SerializeField] private float rotationSpeed = 20f;
+    [SerializeField] private float TimeVelocity;
+    [SerializeField] private Vector3 currentVelocity;
 
     private int localID = 0;
     private static int globalID = 0;
@@ -23,18 +25,21 @@ public class PlayerMovements : MonoBehaviour
     private Quaternion moveRotation;
 
     private bool isRunning = false;
-    private bool displaceButton = false;
+    private bool displace = false;
     private bool isDisplaced = false;
     private bool isOnLadder = false;
 
     private Transform localTransform;
-    
+
+
     public bool IsRunning
     {
         get => isRunning;
         set => isRunning = value;
     }
+
     public Vector3 GetPlayerVelocity => currentVelocity;
+
 
     public float GetMaxSpeed
     {
@@ -59,15 +64,15 @@ public class PlayerMovements : MonoBehaviour
         localTransform = GetComponent<Transform>();
         rigidBody = GetComponent<Rigidbody>();
     }
-    
+
     public int GetID()
     {
         return localID;
     }
 
-    public void SetDisplaceInput(bool buttonInput)
+    public void SetDisplaceInput(Vector2 displaceInputVector)
     {
-        displaceButton = buttonInput;
+        displace = true;
     }
 
     public void SetInputVector(Vector2 playerInputVector)
@@ -82,44 +87,46 @@ public class PlayerMovements : MonoBehaviour
 
     public void MoveToLadder(float ladderPosition)
     {
-        if (displaceButton)
+        if (displace)
         {
-            if (!isDisplaced)
+            if (!isDisplaced && inputVector.y > 0.9)
             {
                 rigidBody.useGravity = false;
                 isOnLadder = true;
                 var newXCoord = ladderPosition - transform.position.x;
                 localTransform.Translate(new Vector3(newXCoord, 0, 2.0f), Space.World);
             }
-            else if (isDisplaced)
+            else if (isDisplaced && inputVector.y < -0.9)
             {
                 rigidBody.useGravity = true;
                 isOnLadder = false;
                 localTransform.Translate(new Vector3(0, 0, -2.0f), Space.World);
             }
             isDisplaced = !isDisplaced;
-            displaceButton = false;
-        }
-    }
-    public void MoveToStairs()
-    {
-        if (displaceButton)
-        {
-            if (!isDisplaced)
-            {
-               localTransform.Translate(new Vector3(0, 0, 2.0f), Space.World);
-            }
-            else if (isDisplaced)
-            {
-                localTransform.Translate(new Vector3(0, 0, -2.0f), Space.World);
-            }
-            isDisplaced = !isDisplaced;
-            displaceButton = false;
+            displace = false;
         }
     }
 
-    public float TimeVelocity;
-    [SerializeField]private Vector3 currentVelocity;
+    public void MoveToStairs()
+    {
+        Debug.Log(displace);
+        if (displace)
+        {
+            if (!isDisplaced && inputVector.y > 0.9)
+            {
+               localTransform.Translate(new Vector3(0, 0, 2.0f), Space.World);
+               isDisplaced = !isDisplaced;
+            }
+            else if (isDisplaced && inputVector.y < -0.9)
+            {
+                localTransform.Translate(new Vector3(0, 0, -2.0f), Space.World);
+                isDisplaced = !isDisplaced;
+            }
+            
+            displace = false;
+        }
+    }
+
     void FixedUpdate()
     {
         if (isRunning)
@@ -139,12 +146,7 @@ public class PlayerMovements : MonoBehaviour
         }
 
         rigidBody.rotation = Quaternion.RotateTowards(transform.rotation, moveRotation, rotationSpeed);
-        //rigidBody.velocity = playerVelocity;
         rigidBody.MovePosition(transform.position + currentVelocity * Time.deltaTime);
-
-
-        //Debug.Log("test");
-
     }
 
 }

@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerAnimationStateController : MonoBehaviour
 {
     private PlayerMovements playerMovements;
+    private PlayerStatsManager playerStatsManager;
     private Animator animator;
     private bool isIdle;
 
@@ -14,11 +15,13 @@ public class PlayerAnimationStateController : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         playerMovements = GetComponent<PlayerMovements>();
+        playerStatsManager = GetComponent<PlayerStatsManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //animator.SetBool("isAiming", playerStatsManager.Attack.IsAiming);
         animator.SetBool("isRunning", playerMovements.IsRunning);
         animator.SetInteger("Input", Mathf.RoundToInt(playerMovements.GetInputVector().x));
         animator.SetFloat("Speed", Math.Abs(playerMovements.GetPlayerVelocity.x));

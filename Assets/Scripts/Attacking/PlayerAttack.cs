@@ -18,6 +18,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private bool isAiming;
     [SerializeField] private float currentAngle;
     
+    public bool IsAiming
+    {
+        get => isAiming;
+    }
     public bool CanFire
     {
         get 

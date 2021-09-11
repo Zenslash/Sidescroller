@@ -41,13 +41,17 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (playerMovements != null)
         {
+            if (context.ReadValue<Vector2>().y != 0)
+            {
+                playerMovements.SetDisplaceInput(context.ReadValue<Vector2>());    
+            }
             playerMovements.SetInputVector(context.ReadValue<Vector2>());
         }
     }
 
     public void OnDisplace(InputAction.CallbackContext context)
     {
-        if (playerMovements != null)
+        /*if (playerMovements != null)
         {
             if(context.started){
                 playerMovements.SetDisplaceInput(true);
@@ -58,7 +62,7 @@ public class PlayerInputHandler : MonoBehaviour
                 playerMovements.SetDisplaceInput(false);
             }
 
-        }
+        }*/
     }
 
     public void OnInteract(InputAction.CallbackContext context)
