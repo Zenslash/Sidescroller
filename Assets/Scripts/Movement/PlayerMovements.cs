@@ -122,7 +122,6 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]private Vector3 currentVelocity;
     void FixedUpdate()
     {
-        Debug.Log(inputVector);
         if (isRunning)
         {
             playerVelocity = new Vector3(inputVector.x * runSpeed, 0, 0);

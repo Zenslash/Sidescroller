@@ -19,7 +19,6 @@ public class PlayerAnimationStateController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(AvatarIKGoal.LeftFoot);
         animator.SetBool("isRunning", playerMovements.IsRunning);
         animator.SetInteger("Input", Mathf.RoundToInt(playerMovements.GetInputVector().x));
         animator.SetFloat("Speed", Math.Abs(playerMovements.GetPlayerVelocity.x));

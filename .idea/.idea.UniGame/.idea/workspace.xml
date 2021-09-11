@@ -6,10 +6,7 @@
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerControls.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerControls.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,9 +40,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/LadderTriger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1xiQgljmbCk5xEciREFCuqpcI5N" />
@@ -99,7 +97,9 @@
       <workItem from="1630927124677" duration="2489000" />
       <workItem from="1630942393611" duration="2429000" />
       <workItem from="1631003360153" duration="9820000" />
-      <workItem from="1631259271678" duration="16644000" />
+      <workItem from="1631259271678" duration="16801000" />
+      <workItem from="1631294634181" duration="1722000" />
+      <workItem from="1631297395691" duration="2792000" />
     </task>
     <servers />
   </component>
