@@ -15,54 +15,33 @@ public class PlayerInputHandler : MonoBehaviour
 
 
     private PlayerInput playerInput;
-    private PlayerMovements playerMovements;
+
     private PlayerStatsManager playerStatsManager;
 
 
-    private void Awake()
+    private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        var playersManagers = FindObjectsOfType<PlayerStatsManager>();
-        var index = playerInput.playerIndex;
-        playerStatsManager = playersManagers.FirstOrDefault(player => player.Movements.GetID() == index);  //playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
-        playerMovements = playerStatsManager.Movements;
-
+        playerStatsManager = GetComponent<PlayerStatsManager>();
     }
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        if (playerStatsManager != null)
-        {
-            playerStatsManager.Movements.IsRunning = context.performed;
-        }
+        playerStatsManager.Movements.IsRunning = context.performed;
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (playerMovements != null)
-        {
-            if (context.ReadValue<Vector2>().y != 0)
-            {
-                playerMovements.SetDisplaceInput(context.ReadValue<Vector2>());    
-            }
-            playerMovements.SetInputVector(context.ReadValue<Vector2>());
+        if (context.ReadValue<Vector2>().y != 0)
+        { 
+            playerStatsManager.Movements.SetDisplaceInput(context.ReadValue<Vector2>());    
         }
+        playerStatsManager.Movements.InputVector = context.ReadValue<Vector2>();
     }
 
-    public void OnDisplace(InputAction.CallbackContext context)
+    public void OnCrouch(InputAction.CallbackContext context)
     {
-        /*if (playerMovements != null)
-        {
-            if(context.started){
-                playerMovements.SetDisplaceInput(true);
-            }
-
-            if (context.canceled)
-            {
-                playerMovements.SetDisplaceInput(false);
-            }
-
-        }*/
+        playerStatsManager.Movements.IsCrouching = context.performed;
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -73,11 +52,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnAiming(InputAction.CallbackContext context)
     {
-        if (playerInput != null)
-        {
-            playerStatsManager.Attack.Aim(context.performed);
-        }
-
+        playerStatsManager.Attack.Aim(context.performed);
     }
 
     public void OnSight(InputAction.CallbackContext context)
