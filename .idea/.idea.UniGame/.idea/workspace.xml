@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="253306d8-2c78-4aa7-9d03-9bf5ed6c7777" name="Default Changelist" comment="" />
+    <list default="true" id="253306d8-2c78-4aa7-9d03-9bf5ed6c7777" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerStatsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerStatsManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/Idle.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/Idle.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/RPG-Character@Idle.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/RPG-Character@Idle.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/RPG-Character@Unarmed-Run-Forward.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/RPG-Character@Unarmed-Run-Forward.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/RPG-Character@Walk.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/RPG-Character@Walk.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Guns/SM_Wep_Rifle_01.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Guns/SM_Wep_Rifle_01.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerControls.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerControls.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +43,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AF218701-FE32-4032-B521-DDD91F13662B/a1/be7de49c/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Plugins/PlayerInput/PlayerInputManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PlayerStatsManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AD0A7939-8190-48A0-A161-F66558C98867/ef/f02d1e8f/AvatarIKGoal.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -28,22 +55,30 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/OnStairsTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsEnterTigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/LadderTriger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Attacking/PlayerAttack.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
+      <option value="$PROJECT_DIR$/Assets/PlayerStatsManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1xiQgljmbCk5xEciREFCuqpcI5N" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.16749585" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="settings.editor.selected.configurable" value="RiderCSharpLiveTemplatesSettingsId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -77,7 +112,14 @@
       <option name="presentableId" value="Default" />
       <updated>1630835545416</updated>
       <workItem from="1630835576885" duration="11520000" />
-      <workItem from="1630919058596" duration="3517000" />
+      <workItem from="1630919058596" duration="4172000" />
+      <workItem from="1630927124677" duration="2489000" />
+      <workItem from="1630942393611" duration="2429000" />
+      <workItem from="1631003360153" duration="9820000" />
+      <workItem from="1631259271678" duration="16801000" />
+      <workItem from="1631294634181" duration="1722000" />
+      <workItem from="1631297395691" duration="2792000" />
+      <workItem from="1631444050043" duration="10788000" />
     </task>
     <servers />
   </component>
