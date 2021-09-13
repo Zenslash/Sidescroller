@@ -5,10 +5,11 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Mirror;
 
 
 
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : NetworkBehaviour
 {
     const string KEYMOUSE = "Keyboard and mouse";
     const string GAMEPAD = "Gamepad";
@@ -19,45 +20,51 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerStatsManager playerStatsManager;
 
 
-    private void Awake()
+    private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        var playersManagers = FindObjectsOfType<PlayerStatsManager>();
-        var index = playerInput.playerIndex;
-        playerStatsManager = playersManagers.FirstOrDefault(player => player.Movements.GetID() == index);  //playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
+        playerStatsManager = GetComponent<PlayerStatsManager>();
         playerMovements = playerStatsManager.Movements;
-
     }
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        if (playerStatsManager != null)
+        if(hasAuthority)
         {
-            playerStatsManager.Movements.IsRunning = context.performed;
+            if (playerStatsManager != null)
+            {
+                playerStatsManager.Movements.IsRunning = context.performed;
+            }
         }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (playerMovements != null)
+        if(hasAuthority)
         {
-            playerMovements.SetInputVector(context.ReadValue<Vector2>());
+            if (playerMovements != null)
+            {
+                playerMovements.SetInputVector(context.ReadValue<Vector2>());
+            }
         }
     }
 
     public void OnDisplace(InputAction.CallbackContext context)
     {
-        if (playerMovements != null)
+        if(hasAuthority)
         {
-            if(context.started){
-                playerMovements.SetDisplaceInput(true);
-            }
-
-            if (context.canceled)
+            if (playerMovements != null)
             {
-                playerMovements.SetDisplaceInput(false);
-            }
+                if (context.started)
+                {
+                    playerMovements.SetDisplaceInput(true);
+                }
 
+                if (context.canceled)
+                {
+                    playerMovements.SetDisplaceInput(false);
+                }
+            }
         }
     }
 
@@ -69,39 +76,47 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnAiming(InputAction.CallbackContext context)
     {
-        if (playerInput != null)
+        if(hasAuthority)
         {
-            playerStatsManager.Attack.Aim(context.performed);
+            if (playerInput != null)
+            {
+                playerStatsManager.Attack.Aim(context.performed);
+            }
         }
-
     }
 
     public void OnSight(InputAction.CallbackContext context)
     {
-        if (playerInput != null)
+        if(hasAuthority)
         {
-            Vector3 direction = Vector2.zero;
-
-            switch (playerInput.currentControlScheme)
+            if (playerInput != null)
             {
-                case GAMEPAD:
-                    direction = new Vector3(100, 100) * context.ReadValue<Vector2>();
-                    break;
-                case KEYMOUSE:
-                    //TODO ZIS
-                    break;
-            }
+                Vector3 direction = Vector2.zero;
 
-            playerStatsManager.Attack.Sight = direction;
+                switch (playerInput.currentControlScheme)
+                {
+                    case GAMEPAD:
+                        direction = new Vector3(100, 100) * context.ReadValue<Vector2>();
+                        break;
+                    case KEYMOUSE:
+                        //TODO ZIS
+                        break;
+                }
+
+                playerStatsManager.Attack.Sight = direction;
+            }
         }
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (playerInput != null)
+        if(hasAuthority)
         {
-            if (context.performed)
-                playerStatsManager.Attack.Fire();
+            if (playerInput != null)
+            {
+                if (context.performed)
+                    playerStatsManager.Attack.Fire();
+            }
         }
     }
 

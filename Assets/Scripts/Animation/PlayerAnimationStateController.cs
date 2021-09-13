@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using Mirror;
 
-public class PlayerAnimationStateController : MonoBehaviour
+public class PlayerAnimationStateController : NetworkBehaviour
 {
     private PlayerMovements playerMovements;
     private Animator animator;
@@ -19,6 +20,15 @@ public class PlayerAnimationStateController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(hasAuthority)
+        {
+            UpdateAnimations();
+        }
+    }
+
+    [Client]
+    private void UpdateAnimations()
+    {
         animator.SetBool("isRunning", playerMovements.IsRunning);
         animator.SetInteger("Input", Mathf.RoundToInt(playerMovements.GetInputVector().x));
         animator.SetFloat("Speed", Math.Abs(playerMovements.GetPlayerVelocity.x));
@@ -30,7 +40,6 @@ public class PlayerAnimationStateController : MonoBehaviour
         {
             animator.speed = Mathf.Abs(playerMovements.GetPlayerVelocity.x) / playerMovements.GetMaxSpeed;
         }
-
     }
 
     /*private void OnAnimatorIK(int layerIndex)

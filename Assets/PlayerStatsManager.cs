@@ -20,7 +20,7 @@ public class PlayerStatsManager : MonoBehaviour
     public float Hp { get => _hp; set => _hp = value; }
     #endregion
 
-    private void Start()
+    private void Awake()
     {
         _movements = transform.GetComponent<PlayerMovements>();
         _attack = transform.GetComponent<PlayerAttack>();

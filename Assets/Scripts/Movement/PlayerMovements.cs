@@ -6,8 +6,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using Mirror;
 
-public class PlayerMovements : MonoBehaviour
+public class PlayerMovements : NetworkBehaviour
 {
     [SerializeField] private float runSpeed = 3f;
     [SerializeField] private float walkSpeed = 1f;
