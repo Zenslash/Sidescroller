@@ -4,7 +4,22 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public PlayerStatsManager Target;
+    private PlayerStatsManager _target;
+    public Vector3 Offset;
+    public PlayerStatsManager Target
+    {
+        set
+        {
+            _target = value;
+            targetTransform = _target.transform;
+            _target.Attack.AttackFired += AttackShake;
+        }
+        get
+        {
+            return _target;
+        }
+    }
+
     public float ChaseSpeed;
     public float ZCordinates;
     /// <summary>
@@ -15,16 +30,22 @@ public class CameraFollow : MonoBehaviour
 
     private Transform targetTransform;
 
-    private void Start()
-    {
-        targetTransform = Target.transform;
-        Target.Attack.AttackFired += AttackShake;
-    }
+    
 
     private void FixedUpdate()
     {
-        Vector3 desiredPos = targetTransform.position + Target.Attack.Sight * SightScaler;
-        desiredPos.z = ZCordinates;
+        Follow();
+        
+    }
+
+    private void Follow()
+    {
+        if (Target == null )
+        {
+            return;
+        }
+        Vector3 desiredPos = targetTransform.position + Target.Attack.Sight * SightScaler + Offset;
+        
 
         transform.position = Vector3.SmoothDamp(transform.position, desiredPos, ref cameraVelocity, ChaseSpeed);
     }

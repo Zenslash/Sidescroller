@@ -24,5 +24,10 @@ public class PlayerStatsManager : MonoBehaviour
     {
         _movements = transform.GetComponent<PlayerMovements>();
         _attack = transform.GetComponent<PlayerAttack>();
+<<<<<<< Updated upstream:Assets/PlayerStatsManager.cs
+=======
+        _animation = transform.GetComponent<PlayerAnimationStateController>();
+        FindObjectOfType<CameraFollow>().Target = this;
+>>>>>>> Stashed changes:Assets/Scripts/PlayerStatsManager.cs
     }
 }
