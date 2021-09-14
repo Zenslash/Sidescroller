@@ -47,19 +47,9 @@ ExportedObj/
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
-*.asset
-*.meta
-*.preset
-Resources
 Temp
 Logs
-Settings
-Scenes
-Packages
-UserSettings
-ProjectSettings
-Library
-Materials
+
 
 # Unity3D generated file on crash reports
 sysinfo.txt

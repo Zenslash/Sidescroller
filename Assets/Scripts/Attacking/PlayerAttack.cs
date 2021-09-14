@@ -1,0 +1,116 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerAttack : MonoBehaviour
+{
+    #region Do not hurt me for this
+    [SerializeField] private Vector3 gunPoiner;
+    [SerializeField] private float spreadAngle;
+    [SerializeField] private float maxSpreadAngle;
+    [SerializeField] private float timeAiming;
+    [SerializeField] private float recoilTime;
+    [SerializeField] private float recoilPunishTime;
+    [SerializeField] public GameObject Bullet;
+    [SerializeField] private float bulletSpeed;
+    #endregion
+    [SerializeField] private bool isAiming;
+    [SerializeField] private float currentAngle;
+    
+    public bool CanFire
+    {
+        get 
+        {
+            return Time.time > lastFired;
+        }  
+    }
+    [SerializeField] public Vector3 Sight;
+    private Coroutine currentAim;
+    private float lastFired;
+
+    private void Start()
+    {
+        isAiming = false;
+        
+    }
+    #region Refactor
+    public void Aim(bool state)
+    {
+        if (state)
+        {
+            StartAiming();
+        }
+        else if (isAiming)
+        {
+            StopAiming();
+        }
+    }
+    
+    public void StartAiming()
+    {
+        isAiming = true;
+        currentAim = StartCoroutine(Aiming());
+    }
+
+    public void StopAiming()
+    {
+        StopCoroutine(currentAim);
+        isAiming = false;
+    }
+    #endregion
+    public void Fire()
+    {
+        if (isAiming && CanFire)
+        {
+            lastFired = Time.time + recoilTime;
+            timeleft += recoilPunishTime;
+            CreateBullet();
+        }
+    }
+
+    private void CreateBullet()
+    {   
+        float directionMistake = currentAngle == 0 ? 0 : Random.Range(-currentAngle, currentAngle);
+        Vector3 directionVector = Quaternion.AngleAxis(directionMistake, Vector3.forward) * Sight.normalized;
+        Quaternion direction = Quaternion.Euler(Vector2.SignedAngle(directionVector, Vector2.right), 90, 0);
+
+        //TODO Replace with objectPooling
+        Rigidbody bullet = Instantiate(Bullet, gunPoiner, direction).GetComponent<Rigidbody>();
+        bullet.velocity = directionVector * bulletSpeed;
+
+    }
+
+    /// <summary>
+    /// How much time left until spread is gone
+    /// </summary>
+    private float timeleft;
+   
+
+    IEnumerator Aiming()
+    {
+        timeleft = timeAiming;
+        Vector3 Angle1;
+        Vector3 Angle2;
+        while (true)
+        { // i feel great pain
+            timeleft = timeleft > 0 ? timeleft - Time.deltaTime : 0; //TODO fix maxSpread bug
+            currentAngle = (spreadAngle * (timeleft / timeAiming))/2;
+            if (currentAngle * 2 > maxSpreadAngle)
+            {
+
+                currentAngle = maxSpreadAngle / 2;
+            }
+            gunPoiner = transform.position;
+            Angle1 = Quaternion.AngleAxis(currentAngle, Vector3.forward) * Sight;
+            Angle2 = Quaternion.AngleAxis(currentAngle, Vector3.back) * Sight;
+
+            Debug.DrawLine(gunPoiner, Angle1);
+            Debug.DrawLine(gunPoiner, Angle2);
+            
+            
+            yield return null;
+        }
+      
+    }
+}
