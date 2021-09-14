@@ -14,10 +14,18 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float recoilPunishTime;
     [SerializeField] public GameObject Bullet;
     [SerializeField] private float bulletSpeed;
+    [SerializeField] private float recoilPower;
     #endregion
     [SerializeField] private bool isAiming;
     [SerializeField] private float currentAngle;
+
+    public delegate void AttackEventHandler(AttackEventArgs attack);
+    public event AttackEventHandler AttackFired;
     
+    public bool IsAiming
+    {
+        get => isAiming;
+    }
     public bool CanFire
     {
         get 
@@ -65,7 +73,10 @@ public class PlayerAttack : MonoBehaviour
         {
             lastFired = Time.time + recoilTime;
             timeleft += recoilPunishTime;
+            AttackEventArgs args = new AttackEventArgs(Sight, recoilPower);
+            AttackFired.Invoke(args);
             CreateBullet();
+
         }
     }
 

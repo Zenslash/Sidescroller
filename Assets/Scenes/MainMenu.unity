@@ -4927,6 +4927,7 @@ MonoBehaviour:
   menuScene: MainMenu
   roomPlayerPrefab: {fileID: 8916480055859023454, guid: 5a17adab4d6fa75428bdd7d7c3d23c4b, type: 3}
   gamePlayerPrefab: {fileID: 8929074808234956840, guid: c148fec156b129f4d9f9db8f100345eb, type: 3}
+  playerSpawnSystem: {fileID: 662893578885748754, guid: e422c93ee6856f74cbe257327572b467, type: 3}
   OnClientConnected: {fileID: 11400000, guid: c018f8d515067f945ab36e9ac13782e4, type: 2}
   OnClientDisconnected: {fileID: 11400000, guid: 751471a1e46fcfd4da4fd66c0d34662b, type: 2}
 --- !u!1 &1894451527
