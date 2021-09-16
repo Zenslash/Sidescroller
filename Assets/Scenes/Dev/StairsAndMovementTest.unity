@@ -772,6 +772,7 @@ GameObject:
   - component: {fileID: 637382530}
   - component: {fileID: 637382529}
   - component: {fileID: 637382528}
+  - component: {fileID: 637382532}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -876,6 +877,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &637382532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637382527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dcb76cac213ec04498b8b893a408500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChaseSpeed: 0.75
+  Offset: {x: 0, y: 1.48, z: -4}
+  SightScaler: 0.01
+  cameraVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &833872483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,7 +1528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Port: 7777
+  Port: 2340
   DualMode: 1
   NoDelay: 1
   Interval: 10
@@ -1549,7 +1566,7 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 3203782534704143493, guid: 0d2cd60d42e0e8149b5901a70155fe5c, type: 3}
+  playerPrefab: {fileID: 3203782534704143493, guid: 407e3f6951d922643a32dc2da05b138f, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []

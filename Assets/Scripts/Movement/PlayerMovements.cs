@@ -13,8 +13,9 @@ public class PlayerMovements : NetworkBehaviour
     #region Comopnents
     private PlayerStatsManager playerStatsManager;
     
-    [SerializeField] private float runSpeed = 3f;
-    [SerializeField] private float walkSpeed = 1f;
+    [SerializeField][Range(0,10)] private float runSpeed = 5f;
+    [SerializeField][Range(0,10)] private float walkSpeed = 2f;
+    [SerializeField][Range(0,10)] private float crouchSpeed = 1f;
     [SerializeField] private float rotationSpeed = 20f;
     [SerializeField] private float timeVelocity = 0.5f;
     [SerializeField] private Vector3 currentVelocity;
@@ -66,7 +67,11 @@ public class PlayerMovements : NetworkBehaviour
     {
         get
         {
-            if (IsRunning && !isCrouching && !isWalkingBackwards)
+            if (isCrouching)
+            {
+                return Mathf.Abs(crouchSpeed);
+            }
+            if (isRunning && !isCrouching && !isWalkingBackwards)
             {
                 return Mathf.Abs(runSpeed);
             }
@@ -100,7 +105,7 @@ public class PlayerMovements : NetworkBehaviour
     private bool CheckIfBackwards()
     {
         var rot = 0;
-        if (transform.localRotation.y == 0)
+        if (Mathf.RoundToInt(transform.localRotation.y) == 0)
         {
             rot = 1;
         }
@@ -152,7 +157,11 @@ public class PlayerMovements : NetworkBehaviour
 
     void FixedUpdate()
     {
-        if (isRunning && !isWalkingBackwards && !isCrouching)
+        if (isCrouching)
+        {
+            playerVelocity = new Vector3(inputVector.x * crouchSpeed, 0, 0);
+        }
+        else if(isRunning && !isWalkingBackwards && !isCrouching)
         {
             playerVelocity = new Vector3(inputVector.x * runSpeed, 0, 0);
         }

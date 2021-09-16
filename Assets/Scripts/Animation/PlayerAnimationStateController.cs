@@ -13,7 +13,7 @@ public class PlayerAnimationStateController : NetworkBehaviour
 
     private float standWeight;
     private float crouchWeight;
-    [SerializeField][Range(0,1)] private float crouchTime;
+    [SerializeField][Range(0,1)] private float crouchTime = 0.06f;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -41,15 +41,14 @@ public class PlayerAnimationStateController : NetworkBehaviour
       if (playerStatsManager.Movements.IsCrouching)
       {
           crouchWeight = Mathf.Lerp(crouchWeight, 1f, crouchTime);
-              crouchWeight = crouchWeight > 0.99 ? 1 : crouchWeight;
-              standWeight = 1 - crouchWeight;
+          crouchWeight = crouchWeight > 0.9999 ? 1 : crouchWeight;
+          standWeight = 1 - crouchWeight;
       }
       else
       {
-
-              standWeight = Mathf.Lerp(standWeight, 1f, crouchTime);
-              standWeight = standWeight > 0.99 ? 1 : standWeight;
-              crouchWeight = 1 - standWeight;
+          standWeight = Mathf.Lerp(standWeight, 1f, crouchTime);
+          standWeight = standWeight > 0.9999 ? 1 : standWeight;
+          crouchWeight = 1 - standWeight;
       }
 
       animator.SetLayerWeight(1, standWeight);
