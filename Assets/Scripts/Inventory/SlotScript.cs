@@ -1,26 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SlotScript : MonoBehaviour, IPointerClickHandler
 {
-    // Start is called before the first frame update
-    void Start()
+    private Stack<Item> items = new Stack<Item>();
+
+    [SerializeField]
+    private Image icon;
+
+    public bool AddItem(Item item)
     {
-        
+        items.Push(item);
+        icon.sprite = item.MyIcon;
+        icon.color = Color.white;
+        return true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Debug.Log("click on " + name);
-        Debug.Log(eventData.button);
-        //Debug.Log(eventData.);
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+
+            Debug.Log("LEFT but");
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+
+        }
     }
 }

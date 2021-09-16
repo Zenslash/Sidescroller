@@ -8,9 +8,10 @@ public class Item : ScriptableObject
     // abstract because the parent class
     public string ItemName;
     public string Description;
-    public Sprite Icon;
     public GameObject Model;
 
+    [SerializeField]
+    private Sprite icon;
     [SerializeField] 
     private int stackSize; 
 
@@ -21,6 +22,13 @@ public class Item : ScriptableObject
         get
         {
             return stackSize;
+        }
+    }
+    public Sprite MyIcon
+    {
+        get
+        {
+            return icon;
         }
     }
 
