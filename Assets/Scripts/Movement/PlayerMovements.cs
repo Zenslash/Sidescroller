@@ -16,22 +16,27 @@ public class PlayerMovements : NetworkBehaviour
     [SerializeField][Range(0,10)] private float runSpeed = 5f;
     [SerializeField][Range(0,10)] private float walkSpeed = 2f;
     [SerializeField][Range(0,10)] private float crouchSpeed = 1f;
+    [SerializeField] [Range(0, 100)] private float moveToStairsSpeed = 10f;
+    [SerializeField] [Range(0, 10)] private float timeToDisplace = 0.01f;
     [SerializeField] private float rotationSpeed = 20f;
     [SerializeField] private float timeVelocity = 0.5f;
     [SerializeField] private Vector3 currentVelocity;
-    
     private Rigidbody rigidBody;
 
     private Vector3 playerVelocity = Vector3.zero;
     private Vector2 inputVector = Vector2.zero;
+
+    private Vector3 stairsTargetPosition;
+
+    private Vector3 mainMovementAxis;
     private Quaternion moveRotation;
 
     private bool isRunning = false;
     private bool isCrouching = false;
     private bool isWalkingBackwards = false;
-    private bool displace = false;
+    private bool isDisplacing = false;
     private bool isDisplaced = false;
-    private bool isOnLadder = false;
+    //private bool isOnLadder = false;
 
     private Transform localTransform;
     
@@ -87,6 +92,7 @@ public class PlayerMovements : NetworkBehaviour
     {
         //localID = globalID;
         //globalID++;
+        mainMovementAxis = transform.position;
         playerStatsManager = GetComponent<PlayerStatsManager>();
         localTransform = GetComponent<Transform>();
         rigidBody = GetComponent<Rigidbody>();
@@ -95,7 +101,7 @@ public class PlayerMovements : NetworkBehaviour
     #region Refactor
     public void SetDisplaceInput(Vector2 displaceInputVector)
     {
-        displace = true;
+        isDisplacing = true;
     }
     
 
@@ -115,7 +121,7 @@ public class PlayerMovements : NetworkBehaviour
     #region Remake
     public void MoveToLadder(float ladderPosition)
     {
-        if (displace)
+        /*if (isDisplacing)
         {
             if (!isDisplaced && inputVector.y > 0.9)
             {
@@ -131,13 +137,23 @@ public class PlayerMovements : NetworkBehaviour
                 localTransform.Translate(new Vector3(0, 0, -2.0f), Space.World);
             }
             isDisplaced = !isDisplaced;
-            displace = false;
-        }
+            isDisplacing = false;
+        }*/
     }
 
-    public void MoveToStairs()
+    public void MoveToStairs(Vector3 targetPosition)
     {
-        if (displace)
+        if (inputVector.y > 0.9)
+        {
+            stairsTargetPosition = targetPosition;   
+            isDisplacing = true;
+        }
+        else if (inputVector.y < -0.9)
+        {
+            stairsTargetPosition.z = mainMovementAxis.z;
+            isDisplacing = true;
+        }
+        /*if (displace)
         {
             if (!isDisplaced && inputVector.y > 0.9)
             {
@@ -151,12 +167,24 @@ public class PlayerMovements : NetworkBehaviour
             }
             
             displace = false;
-        }
+        }*/
     }
     #endregion
 
     void FixedUpdate()
     {
+        if (isDisplacing)
+        {
+            var relativePositon =  stairsTargetPosition - transform.position; 
+            moveRotation = Quaternion.LookRotation(new Vector3(-relativePositon.z, 0, relativePositon.x), Vector3.up);
+            rigidBody.rotation = Quaternion.RotateTowards(transform.rotation, moveRotation, rotationSpeed*10);
+            playerVelocity = Vector3.SmoothDamp(transform.position, stairsTargetPosition, ref currentVelocity, timeToDisplace, moveToStairsSpeed);
+            if ((transform.position - stairsTargetPosition).magnitude < 0.05)
+            {
+                moveRotation = Quaternion.LookRotation(new Vector3(0, 0, currentVelocity.x), Vector3.up);
+                isDisplacing = false;
+            }
+        }
         if (isCrouching)
         {
             playerVelocity = new Vector3(inputVector.x * crouchSpeed, 0, 0);
@@ -176,9 +204,11 @@ public class PlayerMovements : NetworkBehaviour
         {
             moveRotation = Quaternion.LookRotation(new Vector3(0, 0, currentVelocity.x), Vector3.up);
         }
-
-        rigidBody.rotation = Quaternion.RotateTowards(transform.rotation, moveRotation, rotationSpeed);*/
+        */
+        rigidBody.rotation = Quaternion.RotateTowards(transform.rotation, moveRotation, rotationSpeed);
         rigidBody.MovePosition(transform.position + currentVelocity * Time.deltaTime);
     }
 
 }
+
+//2340
