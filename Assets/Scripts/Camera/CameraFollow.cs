@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     private PlayerStatsManager _target;
-    public Vector3 Offset;
     public PlayerStatsManager Target
     {
         set
@@ -21,7 +20,7 @@ public class CameraFollow : MonoBehaviour
     }
 
     public float ChaseSpeed;
-    public float ZCordinates;
+    public Vector3 Offset;
     /// <summary>
     /// How much sight tilt camera
     /// </summary>
@@ -30,23 +29,15 @@ public class CameraFollow : MonoBehaviour
 
     private Transform targetTransform;
 
-    
-
     private void FixedUpdate()
     {
         Follow();
-        
     }
 
     private void Follow()
     {
-        if (Target == null )
-        {
-            return;
-        }
+        if (Target == null) return;
         Vector3 desiredPos = targetTransform.position + Target.Attack.Sight * SightScaler + Offset;
-        
-
         transform.position = Vector3.SmoothDamp(transform.position, desiredPos, ref cameraVelocity, ChaseSpeed);
     }
 

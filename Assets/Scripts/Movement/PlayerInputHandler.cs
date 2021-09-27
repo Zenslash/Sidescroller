@@ -5,54 +5,60 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Mirror;
 
 
 
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : NetworkBehaviour
 {
     const string KEYMOUSE = "Keyboard and mouse";
     const string GAMEPAD = "Gamepad";
 
 
     private PlayerInput playerInput;
-    private PlayerMovements playerMovements;
-    private PlayerStatsManager playerStatsManager;
-    
 
-    private void Awake()
+    private PlayerStatsManager playerStatsManager;
+
+
+    private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        var playersManagers = FindObjectsOfType<PlayerStatsManager>();
-        var index = playerInput.playerIndex;
-        playerStatsManager = playersManagers.FirstOrDefault(player => player.Movements.GetPlayerIndex() == index);  //playersMovement.FirstOrDefault(player => player.GetPlayerIndex() == index);
-        playerMovements = playerStatsManager.Movements;
-        
+        playerStatsManager = GetComponent<PlayerStatsManager>();
+    }
+
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if(hasAuthority)
+        {
+            if (playerStatsManager != null)
+            {
+                playerStatsManager.Movements.IsRunning = context.performed;
+            }
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (playerMovements != null)
+
+        if(hasAuthority)
         {
-            playerMovements.SetInputVector(context.ReadValue<Vector2>());
+          if (context.ReadValue<Vector2>().y != 0)
+          {
+              playerStatsManager.Movements.SetDisplaceInput(context.ReadValue<Vector2>());
+          } 
+          playerStatsManager.Movements.InputVector = context.ReadValue<Vector2>();
         }
+
     }
 
-    public void OnDisplace(InputAction.CallbackContext context)
+    public void OnCrouch(InputAction.CallbackContext context)
     {
-        if (playerMovements != null)
+        if(hasAuthority)
         {
-            if(context.started){
-                playerMovements.SetDisplaceInput(true);
-            }
-
-            if (context.canceled)
-            {
-                playerMovements.SetDisplaceInput(false);
-            }
-            
+            playerStatsManager.Movements.IsCrouching = context.performed;
         }
     }
-    
+
     public void OnInteract(InputAction.CallbackContext context)
     {
         Debug.Log("OnInteract triggered");
@@ -61,30 +67,51 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnAiming(InputAction.CallbackContext context)
     {
-        playerStatsManager.Attack.Aim(context.performed);
-        
+        if(hasAuthority)
+        {
+            if (playerInput != null)
+            {
+                playerStatsManager.Attack.Aim(context.performed);
+            }
+        }
     }
 
     public void OnSight(InputAction.CallbackContext context)
     {
-        Vector3 direction = Vector2.zero;
-        switch (playerInput.currentControlScheme)
+        if(hasAuthority)
         {
-            case GAMEPAD:
-                direction = new Vector3(100, 100) * context.ReadValue<Vector2>();           
-                break;
-            case KEYMOUSE:
-                //TODO ZIS
-                break;
-                
+            if (playerInput != null)
+            {
+                Vector3 direction = Vector2.zero;
+
+                switch (playerInput.currentControlScheme)
+                {
+                    case GAMEPAD:
+                        //Debug.Log(context.ReadValue<Vector2>());
+                        //direction = new Vector2(100, 100) * context.ReadValue<Vector2>();
+                        direction = new Vector2(100 * context.ReadValue<Vector2>().x, 100 * context.ReadValue<Vector2>().y);
+                        Debug.Log(context.ReadValue<Vector2>() + " " + direction);
+                        break;
+                    case KEYMOUSE:
+                        //TODO ZIS
+                        break;
+                }
+
+                playerStatsManager.Attack.Sight = direction;
+            }
         }
-        playerStatsManager.Attack.Sight = direction;
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed)
-            playerStatsManager.Attack.Fire();
+        if(hasAuthority)
+        {
+            if (playerInput != null)
+            {
+                if (context.performed)
+                    playerStatsManager.Attack.Fire();
+            }
+        }
     }
 
 }

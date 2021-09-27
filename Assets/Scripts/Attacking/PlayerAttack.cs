@@ -22,6 +22,10 @@ public class PlayerAttack : MonoBehaviour
     public delegate void AttackEventHandler(AttackEventArgs attack);
     public event AttackEventHandler AttackFired;
     
+    public bool IsAiming
+    {
+        get => isAiming;
+    }
     public bool CanFire
     {
         get 

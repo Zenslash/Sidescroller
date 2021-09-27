@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class StairsTrigger : MonoBehaviour
 {
-    private PlayerMovements playerMovements;
+    [SerializeField] private GameObject targetPosition;
+    private PlayerStatsManager playerStatsManager;
     
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        playerMovements = other.GetComponent<PlayerMovements>();
+        playerStatsManager = other.GetComponentInParent<PlayerStatsManager>();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        playerMovements.MoveToStairs();
+        playerStatsManager.Movements.MoveToStairs(targetPosition.transform.position);
     }
 
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using Mirror;
+using System;
 
 public class SNetworkManager : NetworkManager
 {
@@ -15,10 +16,13 @@ public class SNetworkManager : NetworkManager
 
     [Header("Game")]
     [SerializeField] private SNetworkGamePlayer gamePlayerPrefab = null;
+    [SerializeField] private GameObject playerSpawnSystem = null;
 
     [Header("Events")]
     [SerializeField] private GameEvent OnClientConnected;
     [SerializeField] private GameEvent OnClientDisconnected;
+
+    public static event Action<NetworkConnection> OnServerReadied;
 
     public List<SNetworkRoomPlayer> RoomPlayers { get; } = new List<SNetworkRoomPlayer>();
     public List<SNetworkGamePlayer> GamePlayers { get; } = new List<SNetworkGamePlayer>();
@@ -156,6 +160,22 @@ public class SNetworkManager : NetworkManager
         }
 
         base.ServerChangeScene(newSceneName);
+    }
+
+    public override void OnServerReady(NetworkConnection conn)
+    {
+        base.OnServerReady(conn);
+
+        OnServerReadied?.Invoke(conn);
+    }
+
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        if(sceneName.StartsWith("Scene_Map"))
+        {
+            GameObject playerSpawnSystemInstance = Instantiate(playerSpawnSystem);
+            NetworkServer.Spawn(playerSpawnSystemInstance);
+        }
     }
 
 }

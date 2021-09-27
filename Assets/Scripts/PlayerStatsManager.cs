@@ -7,9 +7,12 @@ public class PlayerStatsManager : MonoBehaviour
     #region Components
     [SerializeField] private PlayerMovements _movements;
     [SerializeField] private PlayerAttack _attack;
+    [SerializeField] private PlayerAnimationStateController _animation;
     
     public PlayerMovements Movements { get => _movements;  }
     public PlayerAttack Attack { get => _attack;  }
+    
+    public PlayerAnimationStateController Animation { get => _animation;  }
     
     #endregion
 
@@ -20,14 +23,11 @@ public class PlayerStatsManager : MonoBehaviour
     public float Hp { get => _hp; set => _hp = value; }
     #endregion
 
-    private void Start()
+    private void Awake()
     {
         _movements = transform.GetComponent<PlayerMovements>();
         _attack = transform.GetComponent<PlayerAttack>();
-<<<<<<< Updated upstream:Assets/PlayerStatsManager.cs
-=======
         _animation = transform.GetComponent<PlayerAnimationStateController>();
         FindObjectOfType<CameraFollow>().Target = this;
->>>>>>> Stashed changes:Assets/Scripts/PlayerStatsManager.cs
     }
 }
