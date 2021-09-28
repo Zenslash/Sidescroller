@@ -20,12 +20,12 @@ public class PlayerHandIK : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
-        animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 0f);
-        animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 0f);
-        animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0f);
-        animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0f);
-        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0f);
-        animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0f);
+        animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 1f);
+        animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 1f);
+        animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1f);
+        animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1f);
+        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
+        animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f);
         if (RightHandTarget != null)
         {
             animator.SetIKHintPosition(AvatarIKHint.RightElbow, RightHandHint.transform.position);

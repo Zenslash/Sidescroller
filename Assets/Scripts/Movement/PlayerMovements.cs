@@ -39,10 +39,19 @@ public class PlayerMovements : NetworkBehaviour
     //private bool isOnLadder = false;
 
     private Transform localTransform;
-    
+
+    public bool IsDisplacing
+    {
+        get => isDisplacing;
+    }
     public bool IsWalkingBackwards
     {
-        get => isWalkingBackwards;
+        get
+        {
+            Debug.Log(InputVector.x + " " +localTransform.forward.x);
+            isWalkingBackwards = Math.Sign(InputVector.x) != Math.Sign(localTransform.forward.x);
+            return isWalkingBackwards;
+        }
         set => isWalkingBackwards = value;
     }
     public bool IsCrouching
@@ -64,7 +73,6 @@ public class PlayerMovements : NetworkBehaviour
         get => inputVector;
         set
         {
-            IsWalkingBackwards = CheckIfBackwards();
             inputVector = value;
         }
     }
@@ -98,25 +106,13 @@ public class PlayerMovements : NetworkBehaviour
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    #region Refactor
-    public void SetDisplaceInput(Vector2 displaceInputVector)
+    /*private bool CheckIfBackwards()
     {
-        isDisplacing = true;
-    }
-    
-
-    #endregion
-   
-    
-    private bool CheckIfBackwards()
-    {
-        var rot = 0;
-        if (Mathf.RoundToInt(transform.localRotation.y) == 0)
-        {
-            rot = 1;
-        }
-        return rot != Mathf.CeilToInt(inputVector.x);
-    }
+        //Debug.Log("loc Rotation = " + InputVector.x);
+        //Debug.Log("cur Velocity = " + GetPlayerVelocity);
+        bool rot = GetPlayerVelocity.x < 0 && InputVector.x > 0 || GetPlayerVelocity.x > 0 && InputVector.x < 0;
+        return rot;
+    }*/
 
     #region Remake
     public void MoveToLadder(float ladderPosition)
@@ -143,68 +139,51 @@ public class PlayerMovements : NetworkBehaviour
 
     public void MoveToStairs(Vector3 targetPosition)
     {
-        if (inputVector.y > 0.9)
+        var intInputVector = Mathf.RoundToInt(inputVector.y);
+        if (intInputVector == 1 && !isDisplaced)
         {
             stairsTargetPosition = targetPosition;   
             isDisplacing = true;
+            
         }
-        else if (inputVector.y < -0.9)
+        else if (intInputVector == -1 && isDisplaced)
         {
             stairsTargetPosition.z = mainMovementAxis.z;
             isDisplacing = true;
         }
-        /*if (displace)
-        {
-            if (!isDisplaced && inputVector.y > 0.9)
-            {
-               localTransform.Translate(new Vector3(0, 0, 2.0f), Space.World);
-               isDisplaced = !isDisplaced;
-            }
-            else if (isDisplaced && inputVector.y < -0.9)
-            {
-                localTransform.Translate(new Vector3(0, 0, -2.0f), Space.World);
-                isDisplaced = !isDisplaced;
-            }
-            
-            displace = false;
-        }*/
     }
     #endregion
-
+    
     void FixedUpdate()
     {
         if (isDisplacing)
         {
-            var relativePositon =  stairsTargetPosition - transform.position; 
-            moveRotation = Quaternion.LookRotation(new Vector3(-relativePositon.z, 0, relativePositon.x), Vector3.up);
-            rigidBody.rotation = Quaternion.RotateTowards(transform.rotation, moveRotation, rotationSpeed*10);
-            playerVelocity = Vector3.SmoothDamp(transform.position, stairsTargetPosition, ref currentVelocity, timeToDisplace, moveToStairsSpeed);
-            if ((transform.position - stairsTargetPosition).magnitude < 0.05)
+            IsWalkingBackwards = false;
+            var relativePositon =  stairsTargetPosition - transform.position;
+            if (relativePositon != Vector3.zero)
             {
-                moveRotation = Quaternion.LookRotation(new Vector3(0, 0, currentVelocity.x), Vector3.up);
-                isDisplacing = false;
+                moveRotation =
+                    Quaternion.LookRotation(new Vector3(relativePositon.x, 0, relativePositon.z), Vector3.up);
             }
-        }
-        if (isCrouching)
-        {
-            playerVelocity = new Vector3(inputVector.x * crouchSpeed, 0, 0);
-        }
-        else if(isRunning && !isWalkingBackwards && !isCrouching)
-        {
-            playerVelocity = new Vector3(inputVector.x * runSpeed, 0, 0);
+            playerVelocity = relativePositon * GetMaxSpeed;
+            if ((transform.position - stairsTargetPosition).magnitude < 0.1)
+            {
+                playerVelocity = Vector3.zero;
+                if (currentVelocity != Vector3.zero)
+                {
+                    moveRotation = Quaternion.LookRotation(new Vector3(currentVelocity.x, 0, 0), Vector3.up);
+                }
+
+                isDisplacing = false;
+                isDisplaced = !isDisplaced;
+            }
         }
         else
         {
-            playerVelocity = new Vector3(inputVector.x * walkSpeed, 0, 0);
+            playerVelocity = new Vector3(inputVector.x * GetMaxSpeed, 0, 0);
         }
         currentVelocity = Vector3.Lerp(currentVelocity, playerVelocity, timeVelocity);
-        currentVelocity.x = Mathf.Abs(currentVelocity.x) < 0.0001 ? 0 :currentVelocity.x;
-
-        /*if (currentVelocity != Vector3.zero)
-        {
-            moveRotation = Quaternion.LookRotation(new Vector3(0, 0, currentVelocity.x), Vector3.up);
-        }
-        */
+        currentVelocity = Mathf.Abs(currentVelocity.magnitude) < 0.1 ? Vector3.zero : currentVelocity;
         rigidBody.rotation = Quaternion.RotateTowards(transform.rotation, moveRotation, rotationSpeed);
         rigidBody.MovePosition(transform.position + currentVelocity * Time.deltaTime);
     }

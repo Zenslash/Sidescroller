@@ -173,7 +173,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: 0.001
+    m_EventTreshold: 0.5
   - m_ConditionMode: 6
     m_ConditionEvent: Input
     m_EventTreshold: 0
@@ -619,7 +619,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Weapons
     m_StateMachine: {fileID: 6539135171302887996}
-    m_Mask: {fileID: 0}
+    m_Mask: {fileID: 31900000, guid: fe9ae7010df787643b5cdde832f015b0, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
@@ -663,7 +663,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: 0.001
+    m_EventTreshold: 0.5
   - m_ConditionMode: 6
     m_ConditionEvent: Input
     m_EventTreshold: 0
@@ -786,15 +786,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: Input
-    m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
     m_EventTreshold: 0.5
-  - m_ConditionMode: 2
-    m_ConditionEvent: isWalkingBackwards
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3555853652847193547}
   m_Solo: 0
@@ -953,12 +947,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 7
-    m_ConditionEvent: Input
-    m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.3
   - m_ConditionMode: 2
     m_ConditionEvent: isWalkingBackwards
     m_EventTreshold: 0
@@ -1039,7 +1030,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: 0
+    m_EventTreshold: 0.5
   - m_ConditionMode: 2
     m_ConditionEvent: isRunning
     m_EventTreshold: 0
@@ -1073,7 +1064,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.3
   - m_ConditionMode: 2
     m_ConditionEvent: isWalkingBackwards
     m_EventTreshold: 0
@@ -1101,7 +1092,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: 0
+    m_EventTreshold: 0.5
   - m_ConditionMode: 1
     m_ConditionEvent: isRunning
     m_EventTreshold: 0
@@ -1211,12 +1202,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 7
-    m_ConditionEvent: Input
-    m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.3
   - m_ConditionMode: 1
     m_ConditionEvent: isWalkingBackwards
     m_EventTreshold: 0

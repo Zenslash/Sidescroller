@@ -56,14 +56,19 @@ public class PlayerAnimationStateController : NetworkBehaviour
       animator.SetBool("isWalkingBackwards", playerStatsManager.Movements.IsWalkingBackwards);
       animator.SetBool("isRunning", playerStatsManager.Movements.IsRunning);
       animator.SetInteger("Input", Mathf.RoundToInt(playerStatsManager.Movements.InputVector.x));
-      animator.SetFloat("Speed", Math.Abs(playerStatsManager.Movements.GetPlayerVelocity.x));
-      if (playerStatsManager.Movements.InputVector.x == 0)
+      animator.SetFloat("Speed", Math.Abs(playerStatsManager.Movements.GetPlayerVelocity.magnitude));
+      if (playerStatsManager.Movements.InputVector.x == 0 && !playerStatsManager.Movements.IsDisplacing)
         {
             animator.speed = 1;
         }
-        else
-        {
-            animator.speed = Mathf.Abs(playerStatsManager.Movements.GetPlayerVelocity.x) / playerStatsManager.Movements.GetMaxSpeed;
-        }
+      else if (playerStatsManager.Movements.IsDisplacing)
+      {
+          animator.speed = playerStatsManager.Movements.GetPlayerVelocity.magnitude /
+                           playerStatsManager.Movements.GetMaxSpeed;
+      }
+      else 
+      { 
+          animator.speed = Mathf.Abs(playerStatsManager.Movements.GetPlayerVelocity.x) / playerStatsManager.Movements.GetMaxSpeed;
+      }
     }
 }

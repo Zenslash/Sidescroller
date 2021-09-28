@@ -3,11 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="253306d8-2c78-4aa7-9d03-9bf5ed6c7777" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/Aiming.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Animations/Aiming.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/HandsOnly.mask" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/HandsOnly.mask.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,10 +48,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Attacking/PlayerAttack.cs" />
       <option value="$PROJECT_DIR$/Assets/PlayerStatsManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
     </changedPaths>
   </component>
@@ -108,7 +113,12 @@
       <workItem from="1631524613143" duration="1374000" />
       <workItem from="1631535697759" duration="2000" />
       <workItem from="1631609907593" duration="5518000" />
-      <workItem from="1631876445132" duration="6469000" />
+      <workItem from="1631876445132" duration="6669000" />
+      <workItem from="1631972563868" duration="4966000" />
+      <workItem from="1632157453161" duration="455000" />
+      <workItem from="1632222440165" duration="4257000" />
+      <workItem from="1632648754393" duration="2038000" />
+      <workItem from="1632739230046" duration="2409000" />
     </task>
     <servers />
   </component>
