@@ -104,7 +104,7 @@ public class ObjectPoolManager : MonoBehaviour
     /// <param name="rotation"></param>
     /// <returns></returns>
     public static GameObject GetObject(string Name,Vector3 pos, Quaternion rotation)
-    {
+    { //TODO make with recources
         GameObject obj = Instance.PoolFind(Name).GetCopy();
         obj.transform.position = pos;
         obj.transform.rotation = rotation;

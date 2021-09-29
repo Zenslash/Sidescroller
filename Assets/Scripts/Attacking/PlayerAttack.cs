@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     #region Do not hurt me for this
-    [SerializeField] private Vector3 gunPoiner;
+    [SerializeField] private Vector3 gunPointer;
     [SerializeField] private float spreadAngle;
     [SerializeField] private float maxSpreadAngle;
     [SerializeField] private float timeAiming;
@@ -87,7 +87,7 @@ public class PlayerAttack : MonoBehaviour
         Quaternion direction = Quaternion.Euler(Vector2.SignedAngle(directionVector, Vector2.right), 90, 0);
 
         //TODO Replace with objectPooling
-        Rigidbody bullet = Instantiate(Bullet, gunPoiner, direction).GetComponent<Rigidbody>();
+        Rigidbody bullet = Instantiate(Bullet, gunPointer, direction).GetComponent<Rigidbody>();
         bullet.velocity = directionVector * bulletSpeed;
 
     }
@@ -112,12 +112,12 @@ public class PlayerAttack : MonoBehaviour
 
                 currentAngle = maxSpreadAngle / 2;
             }
-            gunPoiner = transform.position;
+            gunPointer = transform.position;
             Angle1 = Quaternion.AngleAxis(currentAngle, Vector3.forward) * Sight;
             Angle2 = Quaternion.AngleAxis(currentAngle, Vector3.back) * Sight;
 
-            Debug.DrawLine(gunPoiner, Angle1);
-            Debug.DrawLine(gunPoiner, Angle2);
+            Debug.DrawLine(gunPointer, Angle1);
+            Debug.DrawLine(gunPointer, Angle2);
             
             
             yield return null;
