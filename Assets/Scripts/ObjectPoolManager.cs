@@ -103,24 +103,24 @@ public class ObjectPoolManager : MonoBehaviour
     /// <param name="pos"></param>
     /// <param name="rotation"></param>
     /// <returns></returns>
-    public static GameObject GetObject(string Name,Vector3 pos, Quaternion rotation)
-    { //TODO make with recources
-        GameObject obj = Instance.PoolFind(Name).GetCopy();
-        obj.transform.position = pos;
-        obj.transform.rotation = rotation;
-        obj.SetActive(true);
-        return obj;
-    }
+    //public static GameObject GetObject(string Name,Vector3 pos, Quaternion rotation) If human can make mistake He WILL make mistake
+    //{ //TODO make with recources
+    //    GameObject obj = Instance.PoolFind(Name).GetCopy();
+    //    obj.transform.position = pos;
+    //    obj.transform.rotation = rotation;
+    //    obj.SetActive(true);
+    //    return obj;
+    //}
 
-    private Pool PoolFind(string Name)
-    {
-        Pool pool = Instance.Pools.Find(p => p.ObjectName == Name);
-        if (pool == null)
-        {
-            throw new Exception("Object has not been Instantiated in ObjectPoolManager you moron");
-        }
-        return pool;
-    }
+    //private Pool PoolFind(string Name)
+    //{
+    //    Pool pool = Instance.Pools.Find(p => p.ObjectName == Name);
+    //    if (pool == null)
+    //    {
+    //        throw new Exception("Object has not been Instantiated in ObjectPoolManager you moron");
+    //    }
+    //    return pool;
+    //}
 
     private Pool PoolFind(GameObject gameObject)
     {
