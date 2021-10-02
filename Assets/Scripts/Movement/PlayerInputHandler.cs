@@ -25,7 +25,6 @@ public class PlayerInputHandler : NetworkBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
     }
-
     public void OnRun(InputAction.CallbackContext context)
     {
         if(hasAuthority)
@@ -85,7 +84,7 @@ public class PlayerInputHandler : NetworkBehaviour
                         //Debug.Log(context.ReadValue<Vector2>());
                         //direction = new Vector2(100, 100) * context.ReadValue<Vector2>();
                         direction = new Vector2(100 * (float)Math.Round((double)context.ReadValue<Vector2>().x, 1), 100 * (float)Math.Round((double)context.ReadValue<Vector2>().y, 2));
-                        Debug.Log(context.ReadValue<Vector2>() + " " + direction);
+                        //Debug.Log(context.ReadValue<Vector2>() + " " + direction);
                         break;
                     case KEYMOUSE:
                         //TODO ZIS
@@ -93,6 +92,7 @@ public class PlayerInputHandler : NetworkBehaviour
                 }
 
                 playerStatsManager.Attack.Sight = direction;
+                playerStatsManager.Look.InputVector = direction;
             }
         }
     }

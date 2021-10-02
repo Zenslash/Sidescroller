@@ -58,13 +58,14 @@ public class PlayerAnimationStateController : NetworkBehaviour
       animator.SetInteger("Input", Mathf.RoundToInt(playerStatsManager.Movements.InputVector.x));
       animator.SetFloat("Speed", Math.Abs(playerStatsManager.Movements.GetPlayerVelocity.magnitude));
       if (playerStatsManager.Movements.InputVector.x == 0 && !playerStatsManager.Movements.IsDisplacing)
-        {
-            animator.speed = 1;
-        }
+      {
+            animator.speed = 1; 
+      }
       else if (playerStatsManager.Movements.IsDisplacing)
       {
-          animator.speed = playerStatsManager.Movements.GetPlayerVelocity.magnitude /
-                           playerStatsManager.Movements.GetMaxSpeed;
+          animator.speed = 1;
+          //animator.speed = playerStatsManager.Movements.GetPlayerVelocity.magnitude /
+          //playerStatsManager.Movements.GetMaxSpeed;
       }
       else 
       { 
