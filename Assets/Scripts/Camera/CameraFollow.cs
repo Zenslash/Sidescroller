@@ -4,23 +4,9 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    private PlayerStatsManager _target;
-    public PlayerStatsManager Target
-    {
-        set
-        {
-            _target = value;
-            targetTransform = _target.transform;
-            _target.Attack.AttackFired += AttackShake;
-        }
-        get
-        {
-            return _target;
-        }
-    }
-
+    public PlayerStatsManager Target;
     public float ChaseSpeed;
-    public Vector3 Offset;
+    public float ZCordinates;
     /// <summary>
     /// How much sight tilt camera
     /// </summary>
@@ -29,15 +15,17 @@ public class CameraFollow : MonoBehaviour
 
     private Transform targetTransform;
 
-    private void FixedUpdate()
+    private void Start()
     {
-        Follow();
+        targetTransform = Target.transform;
+        Target.Attack.AttackFired += AttackShake;
     }
 
-    private void Follow()
+    private void FixedUpdate()
     {
-        if (Target == null) return;
-        Vector3 desiredPos = targetTransform.position + Target.Attack.Sight * SightScaler + Offset;
+        Vector3 desiredPos = targetTransform.position + Target.Attack.Sight * SightScaler;
+        desiredPos.z = ZCordinates;
+
         transform.position = Vector3.SmoothDamp(transform.position, desiredPos, ref cameraVelocity, ChaseSpeed);
     }
 
