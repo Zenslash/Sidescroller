@@ -25,7 +25,6 @@ public class PlayerInputHandler : NetworkBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
     }
-
     public void OnRun(InputAction.CallbackContext context)
     {
         if(hasAuthority)
@@ -39,13 +38,8 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-
         if(hasAuthority)
         {
-          if (context.ReadValue<Vector2>().y != 0)
-          {
-              playerStatsManager.Movements.SetDisplaceInput(context.ReadValue<Vector2>());
-            }
             playerStatsManager.Movements.InputVector = context.ReadValue<Vector2>();
         }
 
@@ -87,7 +81,10 @@ public class PlayerInputHandler : NetworkBehaviour
                 switch (playerInput.currentControlScheme)
                 {
                     case GAMEPAD:
-                        direction = new Vector3(100, 100) * context.ReadValue<Vector2>();
+                        //Debug.Log(context.ReadValue<Vector2>());
+                        //direction = new Vector2(100, 100) * context.ReadValue<Vector2>();
+                        direction = new Vector2(100 * (float)Math.Round((double)context.ReadValue<Vector2>().x, 1), 100 * (float)Math.Round((double)context.ReadValue<Vector2>().y, 2));
+                        //Debug.Log(context.ReadValue<Vector2>() + " " + direction);
                         break;
                     case KEYMOUSE:
                         //TODO ZIS
@@ -95,6 +92,7 @@ public class PlayerInputHandler : NetworkBehaviour
                 }
 
                 playerStatsManager.Attack.Sight = direction;
+                playerStatsManager.Look.InputVector = direction;
             }
         }
     }

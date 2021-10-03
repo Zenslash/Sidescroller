@@ -13,7 +13,7 @@ public class PlayerAnimationStateController : NetworkBehaviour
 
     private float standWeight;
     private float crouchWeight;
-    [SerializeField][Range(0,1)] private float crouchTime;
+    [SerializeField][Range(0,1)] private float crouchTime = 0.06f;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -41,15 +41,14 @@ public class PlayerAnimationStateController : NetworkBehaviour
       if (playerStatsManager.Movements.IsCrouching)
       {
           crouchWeight = Mathf.Lerp(crouchWeight, 1f, crouchTime);
-              crouchWeight = crouchWeight > 0.99 ? 1 : crouchWeight;
-              standWeight = 1 - crouchWeight;
+          crouchWeight = crouchWeight > 0.9999 ? 1 : crouchWeight;
+          standWeight = 1 - crouchWeight;
       }
       else
       {
-
-              standWeight = Mathf.Lerp(standWeight, 1f, crouchTime);
-              standWeight = standWeight > 0.99 ? 1 : standWeight;
-              crouchWeight = 1 - standWeight;
+          standWeight = Mathf.Lerp(standWeight, 1f, crouchTime);
+          standWeight = standWeight > 0.9999 ? 1 : standWeight;
+          crouchWeight = 1 - standWeight;
       }
 
       animator.SetLayerWeight(1, standWeight);
@@ -57,14 +56,20 @@ public class PlayerAnimationStateController : NetworkBehaviour
       animator.SetBool("isWalkingBackwards", playerStatsManager.Movements.IsWalkingBackwards);
       animator.SetBool("isRunning", playerStatsManager.Movements.IsRunning);
       animator.SetInteger("Input", Mathf.RoundToInt(playerStatsManager.Movements.InputVector.x));
-      animator.SetFloat("Speed", Math.Abs(playerStatsManager.Movements.GetPlayerVelocity.x));
-      if (playerStatsManager.Movements.InputVector.x == 0)
-        {
-            animator.speed = 1;
-        }
-        else
-        {
-            animator.speed = Mathf.Abs(playerStatsManager.Movements.GetPlayerVelocity.x) / playerStatsManager.Movements.GetMaxSpeed;
-        }
+      animator.SetFloat("Speed", Math.Abs(playerStatsManager.Movements.GetPlayerVelocity.magnitude));
+      if (playerStatsManager.Movements.InputVector.x == 0 && !playerStatsManager.Movements.IsDisplacing)
+      {
+            animator.speed = 1; 
+      }
+      else if (playerStatsManager.Movements.IsDisplacing)
+      {
+          animator.speed = 1;
+          //animator.speed = playerStatsManager.Movements.GetPlayerVelocity.magnitude /
+          //playerStatsManager.Movements.GetMaxSpeed;
+      }
+      else 
+      { 
+          animator.speed = Mathf.Abs(playerStatsManager.Movements.GetPlayerVelocity.x) / playerStatsManager.Movements.GetMaxSpeed;
+      }
     }
 }
