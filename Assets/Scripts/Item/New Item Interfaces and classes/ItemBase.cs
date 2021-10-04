@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ItemBase 
+public class ItemBase: ScriptableObject
 {
     public GameObject Model;
     public Sprite InventorySprite;
-    public abstract int Quantity { get; set; }
+    public int Quantity { get; set; }
+
+    //List<Shootable> shootables;
+
+    public void find()
+    {
+        
+    }
 
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Please do not swear :( 
 [CreateAssetMenu(fileName = "Bag", menuName = "Survival/Items/Bag")]
-public class Bag : Item, IConsumable
+public class Bag : Item
 {
     private int slots;
     [SerializeField]

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class BagButton : MonoBehaviour, IP
+public class BagButton : MonoBehaviour
 {
     private Bag bag;
 
