@@ -42,7 +42,6 @@ public abstract class GoapAction : MonoBehaviour
     public void DoReset()
     {
         inRange = false;
-        target = null;
         Reset();
     }
 
