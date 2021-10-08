@@ -19,6 +19,7 @@ public class CameraFollow : MonoBehaviour
     {
         targetTransform = Target.transform;
         Target.Attack.AttackFired += AttackShake;
+
     }
 
     private void FixedUpdate()
@@ -27,6 +28,8 @@ public class CameraFollow : MonoBehaviour
         desiredPos.z = ZCordinates;
 
         transform.position = Vector3.SmoothDamp(transform.position, desiredPos, ref cameraVelocity, ChaseSpeed);
+        
+        
     }
 
     /// <summary>
@@ -41,5 +44,6 @@ public class CameraFollow : MonoBehaviour
     private void AttackShake(AttackEventArgs args)
     {
         Shake(-args.AttackDirection * args.RecoilPower);
+        
     }
 }

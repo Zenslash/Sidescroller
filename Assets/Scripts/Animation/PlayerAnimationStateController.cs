@@ -19,12 +19,7 @@ public class PlayerAnimationStateController : NetworkBehaviour
         animator = GetComponentInChildren<Animator>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
     }
-
-
-    public void CrouchTransition()
-    {
-
-    }
+    
     void Update()
     {
         if(hasAuthority)
