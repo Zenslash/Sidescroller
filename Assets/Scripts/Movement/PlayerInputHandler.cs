@@ -55,7 +55,10 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("OnInteract triggered");
+        if (playerStatsManager.Movements.IsOnLadder)
+        {
+            playerStatsManager.Movements.InputInteract = context.performed;
+        }
     }
 
 
@@ -81,10 +84,7 @@ public class PlayerInputHandler : NetworkBehaviour
                 switch (playerInput.currentControlScheme)
                 {
                     case GAMEPAD:
-                        //Debug.Log(context.ReadValue<Vector2>());
-                        //direction = new Vector2(100, 100) * context.ReadValue<Vector2>();
                         direction = new Vector2(100 * (float)Math.Round((double)context.ReadValue<Vector2>().x, 1), 100 * (float)Math.Round((double)context.ReadValue<Vector2>().y, 2));
-                        //Debug.Log(context.ReadValue<Vector2>() + " " + direction);
                         break;
                     case KEYMOUSE:
                         //TODO ZIS

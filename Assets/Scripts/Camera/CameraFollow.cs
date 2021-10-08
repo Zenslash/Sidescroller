@@ -19,7 +19,6 @@ public class CameraFollow : MonoBehaviour
     {
         targetTransform = Target.transform;
         Target.Attack.AttackFired += AttackShake;
-
     }
 
     private void FixedUpdate()

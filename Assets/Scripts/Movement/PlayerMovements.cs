@@ -23,12 +23,14 @@ public class PlayerMovements : NetworkBehaviour
     private Rigidbody rigidBody;
 
     private Vector3 playerVelocity = Vector3.zero;
-    private Vector2 inputVector = Vector2.zero;
     private Vector3 stairsTargetPosition;
     private Quaternion rotation = Quaternion.identity;
 
     private Vector3 mainMovementAxis;
 
+    private Vector2 inputVector = Vector2.zero;
+    private bool inputInteract = false;
+    
     private bool isRunning = false;
     private bool isCrouching = false;
     private bool isWalkingBackwards = false;
@@ -41,13 +43,15 @@ public class PlayerMovements : NetworkBehaviour
     public Transform PlayerLocalTransform => localTransform;
     public bool IsDisplacing => isDisplacing;
 
+    public bool InputInteract
+    {
+        get => inputInteract;
+        set => inputInteract = value;
+    }
     public bool IsWalkingBackwards
     {
         get
         {
-            //Debug.Log(Math.Sign(InputVector.x) != Math.Sign(localTransform.forward.x));
-            //Debug.Log("invec" + InputVector.x + "loctr" + localTransform.forward.x);
-            //Debug.Log("invec sign" + Math.Sign(InputVector.x) + "loctr sign" + Math.Sign(localTransform.forward.x));
             if (IsDisplacing)
             {
                 isWalkingBackwards = false;
@@ -153,19 +157,36 @@ public class PlayerMovements : NetworkBehaviour
 
     public void Displace(Vector3 targetPosition, bool ladderTrigger)
     {
-        IsOnLadder = ladderTrigger;
         var intInputVector = Mathf.RoundToInt(inputVector.y);
-        if (intInputVector == 1 && !isDisplaced)
+        if (ladderTrigger)
         {
-            stairsTargetPosition = targetPosition;
-            isDisplacing = true;
-
+            if (intInputVector == 1 && !isDisplaced)
+            {
+                stairsTargetPosition = targetPosition;
+                isDisplacing = true;
+                isOnLadder = true;
+            }
+            else if (inputInteract && IsOnLadder)
+            {
+                stairsTargetPosition = localTransform.position;
+                stairsTargetPosition.z = mainMovementAxis.z;
+                isDisplacing = true;
+            }
         }
-        else if (intInputVector == -1 && isDisplaced)
+        else
         {
-            stairsTargetPosition = localTransform.position;
-            stairsTargetPosition.z = mainMovementAxis.z;
-            isDisplacing = true;
+            if (intInputVector == 1 && !isDisplaced)
+            {
+                stairsTargetPosition = targetPosition;
+                isDisplacing = true;
+
+            }
+            else if (intInputVector == -1 && isDisplaced)
+            {
+                stairsTargetPosition = localTransform.position;
+                stairsTargetPosition.z = mainMovementAxis.z;
+                isDisplacing = true;
+            }
         }
     }
 
