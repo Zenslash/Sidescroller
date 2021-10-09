@@ -16,7 +16,7 @@ public class AISensor : MonoBehaviour
     [SerializeField] private LayerMask  occlusionLayers;
     
     
-    private List<GameObject> objectsInSight;
+    private List<GameObject> objectsInSight = new List<GameObject>();
     /**
      * Represents our sensor
      */
@@ -31,6 +31,16 @@ public class AISensor : MonoBehaviour
     private int count;
     private float scanInterval;
     private float scanTimer;
+
+    public float Distance
+    {
+        get => distance;
+    }
+
+    public float Angle
+    {
+        get => angle;
+    }
 
     private void Start()
     {
@@ -201,12 +211,6 @@ public class AISensor : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Gizmos.DrawSphere(colliders[i].transform.position, 0.2f);
-        }
-
-        Gizmos.color = Color.green;
-        foreach (GameObject go in objectsInSight)
-        {
-            Gizmos.DrawSphere(go.transform.position, 0.2f);
         }
     }
 
