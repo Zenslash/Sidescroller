@@ -10,6 +10,7 @@ public class ItemBase: ScriptableObject
 
     //List<Shootable> shootables;
 
+    //TODO WTF?
     public void find()
     {
         
