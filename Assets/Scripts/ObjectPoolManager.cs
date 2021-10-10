@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 public class ObjectPoolManager : MonoBehaviour
@@ -21,7 +22,7 @@ public class ObjectPoolManager : MonoBehaviour
         public int Count;
         public int Available
         {
-            get { return objects.Count; }
+            get { return objects.Count(); } 
         }
         private Stack<GameObject> objects;
 
@@ -39,6 +40,7 @@ public class ObjectPoolManager : MonoBehaviour
         private void CreateCopy()
         {
             GameObject copy = Transform.Instantiate(Prefab, Instance.transform);
+            copy.name = this.ObjectName;
             copy.SetActive(false);
             objects.Push(copy);
         }
@@ -135,7 +137,8 @@ public class ObjectPoolManager : MonoBehaviour
 
     public static GameObject GetObject(GameObject gameObject)
     {
-        return Instance.Pools.Find(p => p.ObjectName == gameObject.name).GetCopy();
+        return Instance.PoolFind(gameObject).GetCopy();
+            //Instance.Pools.Find(p => p.ObjectName == gameObject.name).GetCopy();
     }
 
     public static GameObject GetObject(GameObject gameObject,Vector3 pos,Quaternion rotation)

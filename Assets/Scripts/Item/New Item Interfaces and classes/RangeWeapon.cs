@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "RangeWeapon", menuName = "ScriptableObjects/RangeWeapon",order = 1)]
 public class RangeWeapon : ItemBase
 {
     
     public WeaponType Type;
-
+    [Range(0f,90f)]
     public float SpreadAngle;
 
     public float BulletSpeed;
@@ -25,6 +26,11 @@ public class RangeWeapon : ItemBase
     /// Bullets amount per on one shot, (many if shotgun, one if otherwise)
     /// </summary>
     public int BulletAmountPerShot;
+    
+    /// <summary>
+    /// How long you need to aim for accurate shot 
+    /// </summary>
+    public float AimingTime;
 
     public float Damage;
     /// <summary>
@@ -39,15 +45,20 @@ public class RangeWeapon : ItemBase
     /// How strong will camera shake then fired
     /// </summary>
     public float RecoilPower;
-
+    [Range(0f,90f)]
     public float MaxSpreadAngle;
 
     public GameObject Bullet;
 
+    private Transform gunPointer;
+
     /// <summary>
     /// End of the gun(or bow)
     /// </summary>
-    public Transform GunPointer;
+    public Transform GetGunPointer
+    {
+        get => gunPointer;
+    }
 
 
     public void Shot() 
@@ -60,7 +71,11 @@ public class RangeWeapon : ItemBase
 
 public enum WeaponType
 {
-    Pistols,
-    Bows,
+    Pistol,
+    Bow,
+    Rifle,
+    Automatic,
+    Shotgun,
+    HandMade
 
 }
