@@ -56,6 +56,11 @@ public abstract class GoapAction : MonoBehaviour
     public abstract bool IsDone();
 
     /**
+     * Called when exit from action
+     */
+    public abstract void OnExit();
+
+    /**
      * Procedurally check if this action can run. Not all actions
      * will need this, but some might
      */

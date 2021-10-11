@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 public class AIMemory
@@ -30,7 +31,8 @@ public class AISensoryMemory
     {
         buffer = new GameObject[maxPlayers];
     }
-
+    
+    [Server]
     public void UpdateSenses(AISensor sensor)
     {
         int targets = sensor.Filter(buffer, layerToRemember);
@@ -41,6 +43,7 @@ public class AISensoryMemory
         }
     }
     
+    [Server]
     public void RefreshMemory(GameObject agent, GameObject target)
     {
         AIMemory memory = FetchMemory(target);
@@ -52,13 +55,15 @@ public class AISensoryMemory
         memory.lastSeen = Time.time;
     }
     
+    [Server]
     public void ForgetMemories(float olderThan)
     {
         memories.RemoveAll(m => m.Age > olderThan);
-        memories.RemoveAll(m => !m.gameObject);
+        memories.RemoveAll(m => (m.gameObject == null));
         memories.RemoveAll(m => !m.gameObject.GetComponent<HealthComponent>().IsAlive());
     }
     
+    [Server]
     public AIMemory FetchMemory(GameObject go)
     {
         AIMemory memory = memories.Find(x => x.gameObject == go);

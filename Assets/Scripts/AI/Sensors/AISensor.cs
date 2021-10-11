@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteInEditMode]
-public class AISensor : MonoBehaviour
+public class AISensor : NetworkBehaviour
 {
     [SerializeField] private float      distance = 10f;
     [SerializeField] private float      angle = 30;
@@ -14,8 +14,8 @@ public class AISensor : MonoBehaviour
     [SerializeField] private int        scanFrequency = 30;
     [SerializeField] private LayerMask  scanLayers;
     [SerializeField] private LayerMask  occlusionLayers;
-    
-    
+
+
     private List<GameObject> objectsInSight = new List<GameObject>();
     /**
      * Represents our sensor
@@ -42,16 +42,19 @@ public class AISensor : MonoBehaviour
         get => angle;
     }
 
+    [Server]
     private void Start()
     {
         scanInterval = 1.0f / scanFrequency;
     }
-
+    
+    [Server]
     private void Update()
     {
         HandleScan();
     }
-
+    
+    [Server]
     private void HandleScan()
     {
         scanTimer -= Time.deltaTime;
@@ -62,6 +65,7 @@ public class AISensor : MonoBehaviour
         }
     }
 
+    [Server]
     private void Scan()
     {
         count = Physics.OverlapSphereNonAlloc(transform.position, distance, colliders, scanLayers,
@@ -79,12 +83,14 @@ public class AISensor : MonoBehaviour
         }
     }
 
+    [Server]
     private bool IsInSight(GameObject go)
     {
+        //TODO Problem in this method
         Vector3 origin = transform.position;
         Vector3 dest = go.transform.position;
         Vector3 dir = dest - origin;
-        
+
         //Y axis check
         if (dir.y < 0 || dir.y > height)
         {
@@ -93,7 +99,7 @@ public class AISensor : MonoBehaviour
 
         //Angle check
         dir.y = 0;
-        float deltaAngle = Vector3.Angle(dir, Vector3.forward);
+        float deltaAngle = Vector3.Angle(dir, transform.forward);
         if (deltaAngle > angle)
         {
             return false;
@@ -109,6 +115,7 @@ public class AISensor : MonoBehaviour
         
         return true;
     }
+    
     private Mesh CreateWedgeMesh()
     {
         Mesh resultMesh = new Mesh();
@@ -208,12 +215,13 @@ public class AISensor : MonoBehaviour
         }
         
         Gizmos.DrawWireSphere(transform.position, distance);
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < objectsInSight.Count; i++)
         {
-            Gizmos.DrawSphere(colliders[i].transform.position, 0.2f);
+            Gizmos.DrawSphere(objectsInSight[i].transform.position, 0.2f);
         }
     }
 
+    [Server]
     public int Filter(GameObject[] buffer, string layerName)
     {
         int layer = LayerMask.NameToLayer(layerName);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,9 +26,24 @@ public class BaseEnemy : SmartCreature
 
     private void Init()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent    = GetComponent<NavMeshAgent>();
+        view            = GetComponent<SmartCreatureView>();
+        goap                = GetComponent<GoapAgent>();
+        
+        goap.OnActionChanged += OnActionChanged;
     }
 
+    private void OnDestroy()
+    {
+        goap.OnActionChanged -= OnActionChanged;
+    }
+
+    protected void OnActionChanged(GoapAction action)
+    {
+        view.UpdateAction(action);
+    }
+
+    [Server]
     public override HashSet<KeyValuePair<string, object>> GetWorldState()
     {
         HashSet<KeyValuePair<string, object>> worldState = new HashSet<KeyValuePair<string, object>>();
@@ -38,6 +54,7 @@ public class BaseEnemy : SmartCreature
         return worldState;
     }
 
+    [Server]
     public override HashSet<KeyValuePair<string, object>> CreateGoalState()
     {
         HashSet<KeyValuePair<string, object>> goals = new HashSet<KeyValuePair<string, object>>();
@@ -47,23 +64,27 @@ public class BaseEnemy : SmartCreature
         return goals;
     }
 
+    [Server]
     public override void PlanFailed(HashSet<KeyValuePair<string, object>> failedGoal)
     {
         // Make sure the world state has changed before running
         // the same goal again, or else it will just fail.
     }
 
+    [Server]
     public override void PlanFound(HashSet<KeyValuePair<string, object>> goal, Queue<GoapAction> actions)
     {
         Debug.Log ("<color=green>Plan found</color> "+ GoapAgent.PrettyPrint(actions));
     }
 
+    [Server]
     public override void ActionsFinished()
     {
         // Everything is done, we completed our actions for this gool
         Debug.Log ("<color=blue>Actions completed</color>");
     }
 
+    [Server]
     public override void PlanAborted(GoapAction aborter)
     {
         // An action bailed out of the plan. State has been reset to plan again.
@@ -72,6 +93,7 @@ public class BaseEnemy : SmartCreature
         Debug.Log ("<color=red>Plan Aborted</color> "+GoapAgent.PrettyPrint(aborter));
     }
 
+    [Server]
     public override bool MoveAgent(GoapAction nextAction)
     {
         if (Vector3.Distance(transform.position, nextAction.target.transform.position) <= 0.1f)

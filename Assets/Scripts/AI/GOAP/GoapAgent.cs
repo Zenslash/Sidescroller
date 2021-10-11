@@ -14,12 +14,27 @@ public sealed class GoapAgent : NetworkBehaviour
     private FSM.FSMState performActionState;    //perform action
 
     private HashSet<GoapAction> availableActions;
-    private Queue<GoapAction> currentActions;
+    private Queue<GoapAction>   currentActions;
+    private GoapAction          performingAction;
 
     private IGoap dataProvider;                 //this is the implementing class that provides our world data and
                                                 //listens to feedback on planning
 
     private GoapPlanner planner;
+
+    public delegate void ActionDelegate(GoapAction action);
+
+    public ActionDelegate OnActionChanged;
+    
+    public GoapAction PerformingAction
+    {
+        get => performingAction;
+        set
+        {
+            performingAction = value;
+            OnActionChanged.Invoke(performingAction);
+        }
+    }
 
     private void Start()
     {
@@ -67,6 +82,7 @@ public sealed class GoapAgent : NetworkBehaviour
         return currentActions.Count > 0;
     }
 
+    [Server]
     private void CreateIdleState()
     {
         idleState = (fsm, gameObj) =>
@@ -99,6 +115,7 @@ public sealed class GoapAgent : NetworkBehaviour
         };
     }
 
+    [Server]
     private void CreateMoveToState()
     {
         //Move to the target state
@@ -123,6 +140,7 @@ public sealed class GoapAgent : NetworkBehaviour
         };
     }
 
+    [Server]
     private void CreatePerformActionState()
     {
         performActionState = (fsm, gameObj) =>
@@ -142,6 +160,7 @@ public sealed class GoapAgent : NetworkBehaviour
             GoapAction action = currentActions.Peek();
             if (action.IsDone())
             {
+                action.OnExit();
                 //the action is done. Remove it so we can perform the next one
                 currentActions.Dequeue();
             }
@@ -155,6 +174,7 @@ public sealed class GoapAgent : NetworkBehaviour
                 if (inRange)
                 {
                     //we are in range, so perform action
+                    PerformingAction = action;
                     bool success = action.Perform(gameObj);
 
                     if (!success)
@@ -181,6 +201,7 @@ public sealed class GoapAgent : NetworkBehaviour
         };
     }
 
+    [Server]
     private void FindDataProvider()
     {
         Component[] components = gameObject.GetComponents(typeof(Component));
@@ -194,6 +215,7 @@ public sealed class GoapAgent : NetworkBehaviour
         }
     }
 
+    [Server]
     private void LoadActions()
     {
         GoapAction[] actions = gameObject.GetComponents<GoapAction>();

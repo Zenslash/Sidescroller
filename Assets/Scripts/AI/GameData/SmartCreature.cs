@@ -6,8 +6,10 @@ using UnityEngine.AI;
 public abstract class SmartCreature : Creature, IGoap
 {
 
-    protected NavMeshAgent navMeshAgent;
-    
+    protected NavMeshAgent      navMeshAgent;
+    protected GoapAgent         goap;
+    protected SmartCreatureView view;
+
     public abstract HashSet<KeyValuePair<string, object>> GetWorldState();
     public abstract HashSet<KeyValuePair<string, object>> CreateGoalState();
 

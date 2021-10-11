@@ -11,8 +11,9 @@ public class WanderAction : GoapAction
 
     [SerializeField] private float      timeoutDelay;
 
-    private Vector3         wanderOffset;
-    private NavMeshAgent    navMeshAgent;
+    private Vector3             wanderOffset;
+    private NavMeshAgent        navMeshAgent;
+    private AITargetingSystem   targetingSystem;
     /**
      * Can we set a new path for navmeshAgent?
      */
@@ -24,6 +25,7 @@ public class WanderAction : GoapAction
         AddEffect("hasTarget", true);
 
         navMeshAgent = GetComponent<NavMeshAgent>();
+        targetingSystem = GetComponent<AITargetingSystem>();
         wanderOffset = new Vector3(wanderDistance, 0f, 0f);
     }
 
@@ -34,12 +36,17 @@ public class WanderAction : GoapAction
     
     protected override void Reset()
     {
-         
+        
+    }
+
+    public override void OnExit()
+    {
+        StopAllCoroutines();
     }
 
     public override bool IsDone()
     {
-        return false;
+        return targetingSystem.HasTarget;
     }
 
     public override bool CheckProceduralPrecondition(GameObject agent)
@@ -70,8 +77,8 @@ public class WanderAction : GoapAction
             : target.transform.position - wanderOffset;
 
         navMeshAgent.SetDestination(targetPos);
-
-        while (navMeshAgent.pathStatus != NavMeshPathStatus.PathComplete)
+        
+        while (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
         {
             yield return null;
         }

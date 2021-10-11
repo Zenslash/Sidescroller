@@ -16,6 +16,11 @@ public class TargetAttackAction : GoapAction
         
     }
 
+    public override void OnExit()
+    {
+        
+    }
+
     public override bool IsDone()
     {
         return false;

@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-[ExecuteInEditMode]
-public class AITargetingSystem : MonoBehaviour
+public class AITargetingSystem : NetworkBehaviour
 {
     /**
      * How much time we store memories?
@@ -58,7 +58,7 @@ public class AITargetingSystem : MonoBehaviour
             Debug.LogError("AITargetingSystem: Attack AI Sensor to Agent!!!");
         }
     }
-
+    
     private void Update()
     {
         memory.UpdateSenses(sensor);
@@ -67,6 +67,7 @@ public class AITargetingSystem : MonoBehaviour
         EvaluateScore();
     }
 
+    [Server]
     private void EvaluateScore()
     {
         foreach (var mem in memory.Memories)
@@ -80,12 +81,14 @@ public class AITargetingSystem : MonoBehaviour
             }
         }
     }
-
+    
+    [Server]
     private float Normalize(float value, float maxValue)
     {
         return 1.0f - (value / maxValue);
     }
     
+    [Server]
     private float CalculateScore(AIMemory memory)
     {
         float distanceScore = Normalize(memory.distance, sensor.Distance) * distanceWeight;
@@ -93,7 +96,7 @@ public class AITargetingSystem : MonoBehaviour
         float ageScore = Normalize(memory.Age, memorySpan) * ageWeight;
         return distanceScore + angleScore + ageScore;
     }
-
+    
     private void OnDrawGizmos()
     {
         float maxScore = float.MinValue;
