@@ -8,8 +8,10 @@ public class TargetSearchAction : GoapAction
 {
     private void Awake()
     {
-        AddPrecondition("hasTarget", true);
-        AddEffect("targetDestroyed", true);
+        AddPrecondition("hasTarget", false);
+        AddPrecondition("hasTargetSeenRecently", true);
+        AddEffect("hasTarget", true);
+        AddEffect("hasTargetSeenRecently", true);
     }
 
     protected override void Reset()
@@ -24,6 +26,7 @@ public class TargetSearchAction : GoapAction
 
     public override bool IsDone()
     {
+         //If target was finded
         return false;
     }
 
@@ -34,7 +37,10 @@ public class TargetSearchAction : GoapAction
 
     public override bool Perform(GameObject agent)
     {
-        Debug.Log("TargetAttackAction performed");
+        //Search
+        
+        //If after delay didnt find
+         //Go to wandering
 
         return true;
     }
