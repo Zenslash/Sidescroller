@@ -22,7 +22,9 @@ public class WanderAction : GoapAction
     private void Start()
     {
         AddPrecondition("hasTarget", false);
+        AddPrecondition("hasTargetSeenRecently", false);
         AddEffect("hasTarget", true);
+        AddEffect("hasTargetSeenRecently", true);
 
         navMeshAgent = GetComponent<NavMeshAgent>();
         targetingSystem = GetComponent<AITargetingSystem>();
