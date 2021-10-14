@@ -830,8 +830,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dcb76cac213ec04498b8b893a408500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 0}
   ChaseSpeed: 0.75
-  Offset: {x: 0, y: 1.48, z: -4}
+  ZCordinates: 0
   SightScaler: 0.01
   cameraVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &833872483
