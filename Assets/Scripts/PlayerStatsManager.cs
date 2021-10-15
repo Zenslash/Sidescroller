@@ -9,6 +9,7 @@ public class PlayerStatsManager : MonoBehaviour
     [SerializeField] private PlayerAttack _attack;
     [SerializeField] private PlayerAnimationStateController _animation;
     [SerializeField] private PlayerLook _look;
+    [SerializeField] private PlayerHandIK _handIK;
     
     public PlayerMovements Movements { get => _movements;  }
     public PlayerAttack Attack { get => _attack;  }
@@ -16,6 +17,8 @@ public class PlayerStatsManager : MonoBehaviour
     public PlayerAnimationStateController Animation { get => _animation;  }
     
     public PlayerLook Look { get => _look;  }
+
+    public PlayerHandIK HandIK { get => _handIK; }
     #endregion
 
 
@@ -31,6 +34,7 @@ public class PlayerStatsManager : MonoBehaviour
         _attack = transform.GetComponent<PlayerAttack>();
         _animation = transform.GetComponent<PlayerAnimationStateController>();
         _look = transform.GetComponent<PlayerLook>();
+        _handIK = transform.GetComponent<PlayerHandIK>();
         FindObjectOfType<CameraFollow>().Target = this;
     }
 }

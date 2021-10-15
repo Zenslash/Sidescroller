@@ -23,7 +23,7 @@ public class CameraFollow : MonoBehaviour
     /// speed of Seek vector
     /// </summary>
     public float ChaseSpeed;
-    public float ZCordinates;
+    public Vector3 Offset;
     /// <summary>
     /// How much sight tilt camera
     /// </summary>

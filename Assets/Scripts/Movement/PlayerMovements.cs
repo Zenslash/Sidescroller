@@ -17,6 +17,7 @@ public class PlayerMovements : NetworkBehaviour
     [SerializeField] [Range(0, 10)] private float runSpeed = 5f;
     [SerializeField] [Range(0, 10)] private float walkSpeed = 2f;
     [SerializeField] [Range(0, 10)] private float crouchSpeed = 1f;
+    [SerializeField] [Range(0, 10)] private float climbSpeed = 3f;
     [SerializeField] private float rotationSpeed = 20f;
     [SerializeField] private float timeVelocity = 0.5f;
     [SerializeField] private Vector3 currentVelocity;
@@ -24,10 +25,10 @@ public class PlayerMovements : NetworkBehaviour
 
     private Vector3 playerVelocity = Vector3.zero;
     private Vector3 stairsTargetPosition;
+    private Vector3 stairsTargetRotation;
     private Quaternion rotation = Quaternion.identity;
 
     private Vector3 mainMovementAxis;
-
     private Vector2 inputVector = Vector2.zero;
     private bool inputInteract = false;
     
@@ -155,29 +156,38 @@ public class PlayerMovements : NetworkBehaviour
 
     #endregion
 
-    public void Displace(Vector3 targetPosition, bool ladderTrigger)
+    public void Displace(Transform targetTransform, bool ladderTrigger)
     {
+        if(IsDisplacing) return;
         var intInputVector = Mathf.RoundToInt(inputVector.y);
+        /*Debug.Log("ld " + ladderTrigger);
+        Debug.Log("iiV " + intInputVector);
+        Debug.Log("iDd " + isDisplaced);*/
+        stairsTargetRotation = targetTransform.forward;
         if (ladderTrigger)
         {
             if (intInputVector == 1 && !isDisplaced)
             {
-                stairsTargetPosition = targetPosition;
+                stairsTargetPosition = targetTransform.position;
                 isDisplacing = true;
                 isOnLadder = true;
+                rigidBody.useGravity = false;
             }
             else if (inputInteract && IsOnLadder)
             {
                 stairsTargetPosition = localTransform.position;
                 stairsTargetPosition.z = mainMovementAxis.z;
                 isDisplacing = true;
+                isOnLadder = false;
+                inputInteract = false;
+                rigidBody.useGravity = true;
             }
         }
         else
         {
             if (intInputVector == 1 && !isDisplaced)
             {
-                stairsTargetPosition = targetPosition;
+                stairsTargetPosition = targetTransform.position;
                 isDisplacing = true;
 
             }
@@ -188,41 +198,46 @@ public class PlayerMovements : NetworkBehaviour
                 isDisplacing = true;
             }
         }
+        //Rotation = targetTransform.forward;
     }
 
     void Displacing()
     {
+        stairsTargetPosition.y = PlayerLocalTransform.position.y;
         var relativePositon =  stairsTargetPosition - transform.position;
         if (relativePositon != Vector3.zero)
         {
-            /*moveRotation =
-                Quaternion.LookRotation(new Vector3(relativePositon.x, 0, relativePositon.z), Vector3.up);*/
             Rotation = new Vector3(relativePositon.x, 0, relativePositon.z);
         }
         playerVelocity = relativePositon * GetMaxSpeed;
         if ((transform.position - stairsTargetPosition).magnitude < 0.1)
         {
+            
             playerVelocity = Vector3.zero;
             currentVelocity = Vector3.zero;
-            //moveRotation = Quaternion.LookRotation(new Vector3(1, 0, 0), Vector3.up);
-            Rotation = new Vector3(1, 0, 0);
-            isDisplacing = false;
             isDisplaced = !isDisplaced;
+            isDisplacing = false;
+            if (isDisplaced)
+            {
+                Rotation = stairsTargetRotation;
+            }
+            else if (!isDisplaced)
+            {
+                Rotation = new Vector3(1, 0, 0);
+            }
         }
     }
 
     void OnLadder()
     {
-        Debug.Log(IsOnLadder);
+        playerVelocity = new Vector3(0, inputVector.y * climbSpeed, 0);
+        
     }
 
 
     void FixedUpdate()
     {
-        if (rotation.eulerAngles != Vector3.zero)
-        {
-            rigidBody.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed);
-        }
+        rigidBody.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed);
         if (isDisplacing)
         {
             Displacing();

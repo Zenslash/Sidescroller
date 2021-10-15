@@ -83,7 +83,7 @@ public class PlayerLook : MonoBehaviour
     
     void Update()
     {
-
+        if(playerStatsManager.Movements.IsOnLadder) return;
         FlipDefaultPosition();
         if (inputVector != Vector2.zero)
         {
