@@ -8,12 +8,17 @@ public class PlayerHandIK : MonoBehaviour
 {
     private Animator animator;
 
-    public GameObject RightHandTarget;
+    [SerializeField] private GameObject rightHandTarget;
     public GameObject LeftHandTarget;
     public GameObject LeftHandHint;
     public GameObject RightHandHint;
-    [SerializeField] [Range(0,1)] private float LeftHandIKWeight = 0f;
-    [SerializeField] [Range(0,1)] private float RightHandIKWeight = 0f; 
+    [SerializeField] [Range(0, 1)] private float LeftHandIKWeight = 0f;
+    [SerializeField] [Range(0, 1)] private float RightHandIKWeight = 0f;
+
+    public GameObject RightHandTarget
+    {
+        set => rightHandTarget = value;
+    }
 
     private void Awake()
     {
@@ -28,11 +33,11 @@ public class PlayerHandIK : MonoBehaviour
         animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, LeftHandIKWeight);
         animator.SetIKPositionWeight(AvatarIKGoal.RightHand, RightHandIKWeight);
         animator.SetIKRotationWeight(AvatarIKGoal.RightHand, RightHandIKWeight);
-        if (RightHandTarget != null)
+        if (rightHandTarget != null)
         {
             animator.SetIKHintPosition(AvatarIKHint.RightElbow, RightHandHint.transform.position);
-            animator.SetIKPosition(AvatarIKGoal.RightHand, RightHandTarget.transform.position);
-            animator.SetIKRotation(AvatarIKGoal.RightHand, RightHandTarget.transform.rotation);
+            animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandTarget.transform.position);
+            animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandTarget.transform.rotation);
         }
 
         if (LeftHandTarget != null)

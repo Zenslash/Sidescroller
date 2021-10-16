@@ -26,5 +26,8 @@ public class StairsTrigger : MonoBehaviour
         playerStatsManager.Movements.Displace(targetPosition.transform, ladderTrigger);
     }
 
-
+    private void OnTriggerExit(Collider other)
+    {
+        climbLadder.PlayerStatsManager = null;
+    }
 }

@@ -231,7 +231,6 @@ public class PlayerMovements : NetworkBehaviour
     void OnLadder()
     {
         playerVelocity = new Vector3(0, inputVector.y * climbSpeed, 0);
-        
     }
 
 
