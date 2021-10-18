@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Please do not swear :( 
+// Please do not swear :( //  i will 
 [CreateAssetMenu(fileName = "Bag", menuName = "Survival/Items/Bag")]
-<<<<<<< Updated upstream
-public class Bag : Item
-=======
+
 public class Bag : Item,IWearable
->>>>>>> Stashed changes
+
 {
     private int slots;
     /// <summary>
@@ -16,8 +14,8 @@ public class Bag : Item,IWearable
     /// </summary>
     [SerializeField] private GameObject bagPrefab;
     
-    // the bag has its own functionality, for example, creating slots  (P.S. What the hell it?)
-    public BagScript MyBagScript { get; set; }
+    // the bag has its own functionality, for example, creating slots  (P.S. What the hell it?) // agree wth is this?
+
     public int Slots 
     { 
         get

@@ -13,9 +13,9 @@ public class Item : ScriptableObject
     [SerializeField]
     private Sprite icon;
     [SerializeField] 
-    private int stackSize; 
+    private int stackSize;
 
-    private SlotScript slot; // for easier removal of an item
+    // private SlotScript slot; // for easier removal of an item // whose idea was it? we have all item control in itemslot script? this is completly unnessesery
 
     public int StackSize
     {
@@ -32,17 +32,17 @@ public class Item : ScriptableObject
         }
     }
 
-    protected SlotScript Slot  // no one should be able to change from the outside
-    {
-        get
-        {
-            return slot;
-        }
-        set  // set if the element has been moved
-        {
-            slot = value;
-        }
-    }
+    //protected SlotScript Slot  // no one should be able to change from the outside // look higher. and how this can be modified from outside if it's protected?
+    //{
+    //    get
+    //    {
+    //        return slot;
+    //    }
+    //    set  // set if the element has been moved
+    //    {
+    //        slot = value;
+    //    }
+    //}
 
 
 }
