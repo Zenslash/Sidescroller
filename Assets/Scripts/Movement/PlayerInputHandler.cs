@@ -127,6 +127,7 @@ public class PlayerInputHandler : NetworkBehaviour
     public void OnInventory(InputAction.CallbackContext context)
     {
         Debug.Log("InventoryPress");
+   
     }
 
 }

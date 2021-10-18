@@ -4,12 +4,18 @@ using UnityEngine;
 
 // Please do not swear :( 
 [CreateAssetMenu(fileName = "Bag", menuName = "Survival/Items/Bag")]
+<<<<<<< Updated upstream
 public class Bag : Item
+=======
+public class Bag : Item,IWearable
+>>>>>>> Stashed changes
 {
     private int slots;
-    [SerializeField]
-    private GameObject bagPrefab;
-
+    /// <summary>
+    /// for 3d object of item
+    /// </summary>
+    [SerializeField] private GameObject bagPrefab;
+    
     // the bag has its own functionality, for example, creating slots  (P.S. What the hell it?)
     public BagScript MyBagScript { get; set; }
     public int Slots 
@@ -23,9 +29,17 @@ public class Bag : Item
     {
         this.slots = slots;
     }
-    public void Consume()
+    /// <summary>
+    /// using for item use;
+    /// </summary>
+    //public void Consume()
+    //{
+    //    MyBagScript = Instantiate(bagPrefab, InventoryScript.MyInstance.transform).GetComponent<BagScript>();
+    //    MyBagScript.AddSlots(slots);
+    //}
+
+    public object Equip()
     {
-        MyBagScript = Instantiate(bagPrefab, InventoryScript.MyInstance.transform).GetComponent<BagScript>();  // 11.1 - 14 minute
-        MyBagScript.AddSlots(slots);
+        throw new System.NotImplementedException();
     }
 }
