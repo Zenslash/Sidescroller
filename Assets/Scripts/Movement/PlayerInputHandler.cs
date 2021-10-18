@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using Mirror;
 
 
@@ -16,7 +15,8 @@ public class PlayerInputHandler : NetworkBehaviour
 
 
     private PlayerInput playerInput;
-
+    private Plane mousePlane;
+    private Camera mainCamera;
     private PlayerStatsManager playerStatsManager;
 
 
@@ -24,6 +24,7 @@ public class PlayerInputHandler : NetworkBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
+        mainCamera = Camera.main;
     }
 
     public void OnRun(InputAction.CallbackContext context)
@@ -93,7 +94,16 @@ public class PlayerInputHandler : NetworkBehaviour
                         //Debug.Log(context.ReadValue<Vector2>() + " " + direction);
                         break;
                     case KEYMOUSE:
-                        //TODO ZIS
+                        float distance;
+                        mousePlane = new Plane(Vector3.forward, -playerStatsManager.transform.position.z);
+                        Ray ray = mainCamera.ScreenPointToRay(context.ReadValue<Vector2>());
+                        if(mousePlane.Raycast(ray,out distance))
+                        {
+                            direction = ray.GetPoint(distance);
+                        }
+                        direction = direction - playerStatsManager.transform.position;
+                        direction = direction.normalized * 100;
+                        Debug.Log(direction+" "+ context.ReadValue<Vector2>());
                         break;
                 }
 
