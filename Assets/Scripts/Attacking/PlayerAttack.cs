@@ -6,16 +6,19 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     #region Do not hurt me for this
-    [SerializeField] private Vector3 gunPoiner;
-    [SerializeField] private float spreadAngle;
-    [SerializeField] private float maxSpreadAngle;
-    [SerializeField] private float timeAiming;
-    [SerializeField] private float recoilTime;
-    [SerializeField] private float recoilPunishTime;
-    [SerializeField] public GameObject Bullet;
-    [SerializeField] private float bulletSpeed;
-    [SerializeField] private float recoilPower;
+    [SerializeField] private Vector3 gunPointer;
+    //[SerializeField] private float spreadAngle;
+    //[SerializeField] private float maxSpreadAngle;
+    //[SerializeField] private float timeAiming;
+    //[SerializeField] private float recoilTime;
+    //[SerializeField] private float recoilPunishTime;
+    //[SerializeField] public GameObject Bullet;
+    //[SerializeField] private float bulletSpeed;
+    //[SerializeField] private float recoilPower;
     #endregion
+
+    public RangeWeapon CurrentWeapon;
+
     [SerializeField] private bool isAiming;
     [SerializeField] private float currentAngle;
 
@@ -67,13 +70,14 @@ public class PlayerAttack : MonoBehaviour
         isAiming = false;
     }
     #endregion
-    public void Fire()
+    public void Fire() //TODO Move it to RangeWeapon
     {
         if (isAiming && CanFire)
         {
-            lastFired = Time.time + recoilTime;
-            timeleft += recoilPunishTime;
-            AttackEventArgs args = new AttackEventArgs(Sight, recoilPower);
+            lastFired = Time.time + CurrentWeapon.RecoilTime;
+            timeleft += CurrentWeapon.RecoilPunishTime;
+            AttackEventArgs args = new AttackEventArgs(Sight, CurrentWeapon.RecoilPower);
+            
             AttackFired.Invoke(args);
             CreateBullet();
 
@@ -86,9 +90,9 @@ public class PlayerAttack : MonoBehaviour
         Vector3 directionVector = Quaternion.AngleAxis(directionMistake, Vector3.forward) * Sight.normalized;
         Quaternion direction = Quaternion.Euler(Vector2.SignedAngle(directionVector, Vector2.right), 90, 0);
 
-        //TODO Replace with objectPooling
-        Rigidbody bullet = Instantiate(Bullet, gunPoiner, direction).GetComponent<Rigidbody>();
-        bullet.velocity = directionVector * bulletSpeed;
+        
+        Rigidbody bullet = ObjectPoolManager.GetObject(CurrentWeapon.Bullet, gunPointer, direction).GetComponent<Rigidbody>();
+        bullet.velocity = directionVector * CurrentWeapon.BulletSpeed;
 
     }
 
@@ -100,24 +104,24 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator Aiming()
     {
-        timeleft = timeAiming;
+        timeleft = CurrentWeapon.AimingTime;
         Vector3 Angle1;
         Vector3 Angle2;
         while (true)
         { // i feel great pain
             timeleft = timeleft > 0 ? timeleft - Time.deltaTime : 0; //TODO fix maxSpread bug
-            currentAngle = (spreadAngle * (timeleft / timeAiming))/2;
-            if (currentAngle * 2 > maxSpreadAngle)
+            currentAngle = (CurrentWeapon.SpreadAngle * (timeleft / CurrentWeapon.AimingTime))/ 2;
+            if (currentAngle * 2 > CurrentWeapon.MaxSpreadAngle)
             {
 
-                currentAngle = maxSpreadAngle / 2;
+                currentAngle = CurrentWeapon.MaxSpreadAngle / 2;
             }
-            gunPoiner = transform.position;
+            gunPointer = transform.position; //TODO Replace with Weapon Gunpointer
             Angle1 = Quaternion.AngleAxis(currentAngle, Vector3.forward) * Sight;
             Angle2 = Quaternion.AngleAxis(currentAngle, Vector3.back) * Sight;
 
-            Debug.DrawLine(gunPoiner, Angle1);
-            Debug.DrawLine(gunPoiner, Angle2);
+            Debug.DrawLine(gunPointer, Angle1);
+            Debug.DrawLine(gunPointer, Angle2);
             
             
             yield return null;

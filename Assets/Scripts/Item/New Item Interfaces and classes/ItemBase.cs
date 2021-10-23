@@ -6,14 +6,10 @@ public class ItemBase: ScriptableObject
 {
     public GameObject Model;
     public Sprite InventorySprite;
-    public int Quantity { get; set; }
+    public int MaxStack { get; set; }
 
-    //List<Shootable> shootables;
 
-    //TODO WTF?
-    public void find()
-    {
-        
-    }
+    
+
 
 }

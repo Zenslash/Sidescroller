@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using Mirror;
 
 
@@ -16,7 +15,8 @@ public class PlayerInputHandler : NetworkBehaviour
 
 
     private PlayerInput playerInput;
-
+    private Plane mousePlane;
+    private Camera mainCamera;
     private PlayerStatsManager playerStatsManager;
 
 
@@ -24,6 +24,7 @@ public class PlayerInputHandler : NetworkBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
+        mainCamera = Camera.main;
     }
 
     public void OnRun(InputAction.CallbackContext context)
@@ -45,8 +46,8 @@ public class PlayerInputHandler : NetworkBehaviour
           if (context.ReadValue<Vector2>().y != 0)
           {
               playerStatsManager.Movements.SetDisplaceInput(context.ReadValue<Vector2>());
-            }
-            playerStatsManager.Movements.InputVector = context.ReadValue<Vector2>();
+          } 
+          playerStatsManager.Movements.InputVector = context.ReadValue<Vector2>();
         }
 
     }
@@ -87,10 +88,22 @@ public class PlayerInputHandler : NetworkBehaviour
                 switch (playerInput.currentControlScheme)
                 {
                     case GAMEPAD:
-                        direction = new Vector3(100, 100) * context.ReadValue<Vector2>();
+                        //Debug.Log(context.ReadValue<Vector2>());
+                        //direction = new Vector2(100, 100) * context.ReadValue<Vector2>();
+                        direction = new Vector2(100 * context.ReadValue<Vector2>().x, 100 * context.ReadValue<Vector2>().y);
+                        //Debug.Log(context.ReadValue<Vector2>() + " " + direction);
                         break;
                     case KEYMOUSE:
-                        //TODO ZIS
+                        float distance;
+                        mousePlane = new Plane(Vector3.forward, -playerStatsManager.transform.position.z);
+                        Ray ray = mainCamera.ScreenPointToRay(context.ReadValue<Vector2>());
+                        if(mousePlane.Raycast(ray,out distance))
+                        {
+                            direction = ray.GetPoint(distance);
+                        }
+                        direction = direction - playerStatsManager.transform.position;
+                        direction = direction.normalized * 100;
+                        Debug.Log(direction+" "+ context.ReadValue<Vector2>());
                         break;
                 }
 
