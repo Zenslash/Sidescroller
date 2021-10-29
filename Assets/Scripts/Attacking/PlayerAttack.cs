@@ -7,20 +7,19 @@ public class PlayerAttack : MonoBehaviour
 {
     #region Do not hurt me for this
     [SerializeField] private Vector3 gunPointer;
-    //[SerializeField] private float spreadAngle;
-    //[SerializeField] private float maxSpreadAngle;
-    //[SerializeField] private float timeAiming;
-    //[SerializeField] private float recoilTime;
-    //[SerializeField] private float recoilPunishTime;
-    //[SerializeField] public GameObject Bullet;
-    //[SerializeField] private float bulletSpeed;
-    //[SerializeField] private float recoilPower;
+
     #endregion
 
     public RangeWeapon CurrentWeapon;
-
     [SerializeField] private bool isAiming;
     [SerializeField] private float currentAngle;
+    [SerializeField] public Vector3 Sight;
+    private Coroutine currentAim;
+    private float lastFired;
+    /// <summary>
+    /// How much time left until spread is gone
+    /// </summary>
+    private float timeleft;
 
     public delegate void AttackEventHandler(AttackEventArgs attack);
     public event AttackEventHandler AttackFired;
@@ -36,9 +35,7 @@ public class PlayerAttack : MonoBehaviour
             return Time.time > lastFired;
         }  
     }
-    [SerializeField] public Vector3 Sight;
-    private Coroutine currentAim;
-    private float lastFired;
+   
 
     private void Start()
     {
@@ -96,10 +93,7 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// How much time left until spread is gone
-    /// </summary>
-    private float timeleft;
+ 
    
 
     IEnumerator Aiming()

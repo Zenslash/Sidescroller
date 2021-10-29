@@ -8,6 +8,7 @@ public class ItemSlot : MonoBehaviour
     private int _amount;
     private ItemBase item;
 
+    
 
     public ItemBase GetItem
     {

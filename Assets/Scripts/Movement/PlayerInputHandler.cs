@@ -103,7 +103,7 @@ public class PlayerInputHandler : NetworkBehaviour
                         }
                         direction = direction - playerStatsManager.transform.position;
                         direction = direction.normalized * 100;
-                        Debug.Log(direction+" "+ context.ReadValue<Vector2>());
+                        
                         break;
                 }
 
