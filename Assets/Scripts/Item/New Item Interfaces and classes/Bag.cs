@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bag : Items, IUseable
+public class Bag : Item
 {
     private int slots;
 

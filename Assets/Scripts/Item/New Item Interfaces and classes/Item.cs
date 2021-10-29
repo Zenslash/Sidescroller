@@ -4,13 +4,9 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Survival/Item", order = 51)]
-<<<<<<< Updated upstream:Assets/Scripts/Items/Item.cs
+
 public class Item : ScriptableObject
-=======
-public abstract class Items : ScriptableObject
->>>>>>> Stashed changes:Assets/Scripts/Items/Items.cs
 {
-    // abstract because the parent class
     public string ItemName;
     public string Description;
     public Sprite Icon;
