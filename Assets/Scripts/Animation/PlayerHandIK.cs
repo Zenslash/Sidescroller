@@ -43,6 +43,7 @@ public class PlayerHandIK : MonoBehaviour
         animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftHandIKWeight);
         animator.SetIKPositionWeight(AvatarIKGoal.RightHand, rightHandIKWeight);
         animator.SetIKRotationWeight(AvatarIKGoal.RightHand, rightHandIKWeight);
+        Debug.Log(rightHandTarget);
         if (rightHandTarget != null)
         {
             animator.SetIKHintPosition(AvatarIKHint.RightElbow, rightHandHint.transform.position);

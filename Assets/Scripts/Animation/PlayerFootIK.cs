@@ -50,7 +50,6 @@ public class PlayerFootIK : MonoBehaviour
     {
         RaycastHit hit;
         Ray ray = new Ray(animator.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
-        Debug.DrawRay(animator.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down, Color.red);
         if (Physics.Raycast(ray, out hit, distanceToGround + 1f, layerMask))
         {
             Vector3 footPosition = hit.point;
@@ -60,7 +59,6 @@ public class PlayerFootIK : MonoBehaviour
         }
 
         ray = new Ray(animator.GetIKPosition(AvatarIKGoal.RightFoot) + Vector3.up, Vector3.down);
-        Debug.DrawRay(animator.GetIKPosition(AvatarIKGoal.RightFoot) + Vector3.up, Vector3.down, Color.red);
         if (Physics.Raycast(ray, out hit, distanceToGround + 1f, layerMask))
         {
             Vector3 footPosition = hit.point;

@@ -7,13 +7,7 @@ using UnityEngine.Animations.Rigging;
 
 public class PlayerLook : MonoBehaviour
 {
-    [SerializeField]private GameObject spineRig;
-    [SerializeField]private GameObject headRig;
-    private MultiAimConstraint spineConstraint;
-    private MultiAimConstraint headConstraint;
-
-    
-    
+    #region Components
     [SerializeField]private GameObject lookTarget;
     private Transform lookTargetTransform;
     private Transform playerTransform;
@@ -22,31 +16,26 @@ public class PlayerLook : MonoBehaviour
     private PlayerStatsManager playerStatsManager;
     private Vector2 inputVector;
     
-    
+    [Tooltip("Minimal distance from player to look target")]
     [SerializeField][Range(0,100)] private float minAimRadius;
+    [Tooltip("Speed at which target moves to desired position")]
     [SerializeField] [Range(0, .2f)] private float aimSpeed;
     
     
     [SerializeField]private Vector3 defaultTargetPosition;
     private Vector3 wantedTargetPosition;
-    public MultiAimConstraint SpineConstraint
-    {
-        get => spineConstraint;
-    }
-
-    public MultiAimConstraint HeadConstraint
-    {
-        get => headConstraint;
-    }
+    
+    /// <summary>
+    /// Look vector input
+    /// </summary>
     public Vector2 InputVector
     {
         get => inputVector;
         set => inputVector = value;
     }
-    void Awake()
+    #endregion
+    private void Awake()
     {
-        headConstraint = headRig.GetComponent<MultiAimConstraint>();
-        spineConstraint = spineRig.GetComponent<MultiAimConstraint>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
         lookTargetTransform = lookTarget.transform;
         playerTransform = playerStatsManager.Movements.PlayerLocalTransform;
@@ -61,7 +50,9 @@ public class PlayerLook : MonoBehaviour
         correctedPlayerPosition.y += 4;
         Gizmos.DrawWireSphere(correctedPlayerPosition, minAimRadius);
     }
-
+    /// <summary>
+    /// Called when look target gets to close to player, calculates position for target on the sphere so the target dont get too close.
+    /// </summary>
     void DeadZone()
     {
         var sphereCoord = lookTargetTransform.position;
@@ -72,7 +63,9 @@ public class PlayerLook : MonoBehaviour
             2 * sphereCoord.x * playerCoord.x - Mathf.Pow(playerCoord.x, 2) - Mathf.Pow(sphereCoord.y, 2) +
             2 * sphereCoord.y*playerCoord.y - Mathf.Pow(playerCoord.y,2))) + playerCoord.z;
     }
-
+    /// <summary>
+    /// Called when player model need to be rotated. Rotates player 180
+    /// </summary>
     void FlipDefaultPosition()
     {
         if (Math.Sign(lookTargetTransform.position.x) != Math.Sign(playerTransform.forward.x) && Mathf.RoundToInt(inputVector.normalized.x) !=0)
