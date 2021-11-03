@@ -13,22 +13,28 @@ public class PlayerMovements : NetworkBehaviour
     #region Comopnents
 
     private PlayerStatsManager playerStatsManager;
-
+    [Tooltip("Max speed of running")]
     [SerializeField] [Range(0, 10)] private float runSpeed = 5f;
+    [Tooltip("Max speed of walking")]
     [SerializeField] [Range(0, 10)] private float walkSpeed = 2f;
+    [Tooltip("Max speed of crouch walking")]
     [SerializeField] [Range(0, 10)] private float crouchSpeed = 1f;
+    [Tooltip("Max speed of climbing")]
     [SerializeField] [Range(0, 10)] private float climbSpeed = 3f;
+    [Tooltip("Rotation speed")]
     [SerializeField] private float rotationSpeed = 20f;
-    [SerializeField] private float timeVelocity = 0.5f;
-    [SerializeField] private Vector3 currentVelocity;
-    private Rigidbody rigidBody;
+    [Tooltip("Speed at which player gains max movement speed")]
+    [SerializeField] private float acceleration = 0.5f;
 
-    private Vector3 playerVelocity = Vector3.zero;
-    private Vector3 stairsTargetPosition;
-    private Vector3 stairsTargetRotation;
+    private Rigidbody rigidBody;
+    
+    private Vector3 currentVelocity;
+    private Vector3 velocity = Vector3.zero;
+    private Vector3 displacementTargetPosition;
+    private Vector3 displacementTargetRotation;
     private Quaternion rotation = Quaternion.identity;
 
-    private Vector3 mainMovementAxis;
+    private float mainMovementAxis;
     private Vector2 inputVector = Vector2.zero;
     private bool inputInteract = false;
     
@@ -41,14 +47,31 @@ public class PlayerMovements : NetworkBehaviour
 
     private Transform localTransform;
 
+    /// <summary>
+    /// Returns player transform component.
+    /// </summary>
     public Transform PlayerLocalTransform => localTransform;
-    public bool IsDisplacing => isDisplacing;
 
+    /// <summary>
+    /// Returns true if player is currently displacing
+    /// </summary>
+    public bool IsDisplacing
+    {
+        get => isDisplacing;
+        set => isDisplacing = value;
+    }
+   
+    /// <summary>
+    /// set true if interact button is pressed
+    /// </summary>
     public bool InputInteract
     {
-        get => inputInteract;
         set => inputInteract = value;
     }
+   
+    /// <summary>
+    /// Returns true if player moving opposite way of his rotation
+    /// </summary>
     public bool IsWalkingBackwards
     {
         get
@@ -57,7 +80,7 @@ public class PlayerMovements : NetworkBehaviour
             {
                 isWalkingBackwards = false;
             }
-            else if (GetPlayerVelocity == Vector3.zero)
+            else if (PlayerVelocity == Vector3.zero)
             {
                 isWalkingBackwards = false;
             }
@@ -69,42 +92,65 @@ public class PlayerMovements : NetworkBehaviour
             return isWalkingBackwards;
         }
     }
-
+    
+    /// <summary>
+    /// Returns true if player is on ladder or is displacing to ladder
+    /// </summary>
     public bool IsOnLadder
     {
         get => isOnLadder;
         set => isOnLadder = value;
     }
+   
+    /// <summary>
+    /// Returns true if player is crouching
+    /// </summary>
     public bool IsCrouching
     {
         get => isCrouching;
         set => isCrouching = value;
     }
-
+    
+    /// <summary>
+    /// True if player is running.
+    /// </summary>
     public bool IsRunning
     {
         get => isRunning;
         set => isRunning = value;
     }
+    
+    /// <summary>
+    /// Returns and sets current player velocity
+    /// </summary>
+    public Vector3 PlayerVelocity
+    {
+        get => currentVelocity;
+        set => currentVelocity = value;
+    }
 
-    public Vector3 GetPlayerVelocity => currentVelocity;
-
+    /// <summary>
+    /// Returns and sets movement input
+    /// </summary>
     public Vector2 InputVector
     {
         get => inputVector;
         set => inputVector = value;
     }
-
+   
+    /// <summary>
+    /// Returns max speed player can move
+    /// </summary>
     public float GetMaxSpeed
     {
         get
         {
-            if (isCrouching)
+            if (IsCrouching)
             {
                 return Mathf.Abs(crouchSpeed);
             }
 
-            if (isRunning && !isCrouching && !isWalkingBackwards)
+            if (IsRunning && !IsCrouching && !IsWalkingBackwards)
             {
                 return Mathf.Abs(runSpeed);
             }
@@ -114,147 +160,142 @@ public class PlayerMovements : NetworkBehaviour
             }
         }
     }
-
+   
+    /// <summary>
+    /// Sets rotation for player
+    /// </summary>
     public Vector3 Rotation
     {
         set => rotation = Quaternion.LookRotation(value, Vector3.up);
     }
+
+    /// <summary>
+    /// True if player is not on main movement axis
+    /// </summary>
+    public bool IsDisplaced
+    {
+        get => isDisplaced;
+        set => isDisplaced = value;
+    }
+
     #endregion
 
     private void Awake()
     {
-        mainMovementAxis = transform.position;
+        mainMovementAxis = transform.position.z;
         playerStatsManager = GetComponent<PlayerStatsManager>();
         localTransform = GetComponent<Transform>();
         rigidBody = GetComponent<Rigidbody>();
+        Physics.IgnoreLayerCollision(0,7);
     }
-
-
-    #region Remake
-
-    public void MoveToLadder(float ladderPosition)
-    {
-        /*if (isDisplacing)
-        {
-            if (!isDisplaced && inputVector.y > 0.9)
-            {
-                rigidBody.useGravity = false;
-                isOnLadder = true;
-                var newXCoord = ladderPosition - transform.position.x;
-                localTransform.Translate(new Vector3(newXCoord, 0, 2.0f), Space.World);
-            }
-            else if (isDisplaced && inputVector.y < -0.9)
-            {
-                rigidBody.useGravity = true;
-                isOnLadder = false;
-                localTransform.Translate(new Vector3(0, 0, -2.0f), Space.World);
-            }
-            isDisplaced = !isDisplaced;
-            isDisplacing = false;
-        }*/
-    }
-
-    #endregion
-
-    public void Displace(Transform targetTransform, bool ladderTrigger)
+    
+    
+    /// <summary>
+    /// Called when player in stairs or ladder trigger. Sets target for player to displace
+    /// </summary>
+    /// <param name="targetTransform">Displacement target</param>
+    /// <param name="isLadderTrigger">Decides if player displaces to ladder or to stairs</param>
+    public void SetDisplacementTarget(Transform targetTransform, bool isLadderTrigger)
     {
         if(IsDisplacing) return;
         var intInputVector = Mathf.RoundToInt(inputVector.y);
-        /*Debug.Log("ld " + ladderTrigger);
-        Debug.Log("iiV " + intInputVector);
-        Debug.Log("iDd " + isDisplaced);*/
-        stairsTargetRotation = targetTransform.forward;
-        if (ladderTrigger)
+        displacementTargetRotation = targetTransform.forward;
+        if (isLadderTrigger)
         {
-            if (intInputVector == 1 && !isDisplaced)
+            if (intInputVector == 1 && !IsDisplaced)
             {
-                stairsTargetPosition = targetTransform.position;
-                isDisplacing = true;
-                isOnLadder = true;
+                displacementTargetPosition = targetTransform.position;
+                IsDisplacing = true;
+                IsOnLadder = true;
                 rigidBody.useGravity = false;
             }
             else if (inputInteract && IsOnLadder)
             {
-                stairsTargetPosition = localTransform.position;
-                stairsTargetPosition.z = mainMovementAxis.z;
-                isDisplacing = true;
-                isOnLadder = false;
+                displacementTargetPosition = localTransform.position;
+                displacementTargetPosition.z = mainMovementAxis;
+                IsDisplacing = true;
+                IsOnLadder = false;
                 inputInteract = false;
                 rigidBody.useGravity = true;
             }
         }
         else
         {
-            if (intInputVector == 1 && !isDisplaced)
+            if (intInputVector == 1 && !IsDisplaced)
             {
-                stairsTargetPosition = targetTransform.position;
-                isDisplacing = true;
+                displacementTargetPosition = targetTransform.position;
+                IsDisplacing = true;
 
             }
-            else if (intInputVector == -1 && isDisplaced)
+            else if (intInputVector == -1 && IsDisplaced)
             {
-                stairsTargetPosition = localTransform.position;
-                stairsTargetPosition.z = mainMovementAxis.z;
-                isDisplacing = true;
+                displacementTargetPosition = localTransform.position;
+                displacementTargetPosition.z = mainMovementAxis;
+                IsDisplacing = true;
             }
         }
-        //Rotation = targetTransform.forward;
     }
-
+    
+    
+    /// <summary>
+    /// Called when player in stairs or ladder trigger and presses button to displace
+    /// </summary>
     void Displacing()
     {
-        stairsTargetPosition.y = PlayerLocalTransform.position.y;
-        var relativePositon =  stairsTargetPosition - transform.position;
+        displacementTargetPosition.y = PlayerLocalTransform.position.y;
+        var relativePositon =  displacementTargetPosition - transform.position;
         if (relativePositon != Vector3.zero)
         {
             Rotation = new Vector3(relativePositon.x, 0, relativePositon.z);
         }
-        playerVelocity = relativePositon * GetMaxSpeed;
-        if ((transform.position - stairsTargetPosition).magnitude < 0.1)
+        velocity = relativePositon * GetMaxSpeed;
+        if ((transform.position - displacementTargetPosition).magnitude < 0.1)
         {
             
-            playerVelocity = Vector3.zero;
-            currentVelocity = Vector3.zero;
-            isDisplaced = !isDisplaced;
-            isDisplacing = false;
-            if (isDisplaced)
+            velocity = Vector3.zero;
+            PlayerVelocity = Vector3.zero;
+            IsDisplaced = !IsDisplaced;
+            IsDisplacing = false;
+            if (IsDisplaced)
             {
-                Rotation = stairsTargetRotation;
+                Rotation = displacementTargetRotation;
             }
-            else if (!isDisplaced)
+            else if (!IsDisplaced)
             {
                 Rotation = new Vector3(1, 0, 0);
             }
         }
     }
-
-    void OnLadder()
+    
+    
+    /// <summary>
+    /// Called when player is on ladder. Changes movement to climbing movement 
+    /// </summary>
+    void LadderMovement()
     {
-        playerVelocity = new Vector3(0, inputVector.y * climbSpeed, 0);
+        velocity = new Vector3(0, inputVector.y * climbSpeed, 0);
     }
-
-
+    
+    
     void FixedUpdate()
     {
         rigidBody.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed);
-        if (isDisplacing)
+        if (IsDisplacing)
         {
             Displacing();
         }
-        else if (isOnLadder && isDisplaced)
+        else if (IsOnLadder && IsDisplaced)
         {
-            OnLadder();
+            LadderMovement();
         }
         else
         {
-            playerVelocity = new Vector3(inputVector.x * GetMaxSpeed, 0, 0);
+            velocity = new Vector3(inputVector.x * GetMaxSpeed, 0, 0);
         }
-        currentVelocity = Vector3.Lerp(currentVelocity, playerVelocity, timeVelocity);
-        currentVelocity = currentVelocity.magnitude < 0.01 ? Vector3.zero : currentVelocity;
+        PlayerVelocity = Vector3.Lerp(PlayerVelocity, velocity, acceleration);
+        PlayerVelocity = PlayerVelocity.magnitude < 0.01 ? Vector3.zero : PlayerVelocity;
         
-        rigidBody.MovePosition(transform.position + currentVelocity * Time.deltaTime);
+        rigidBody.MovePosition(transform.position + PlayerVelocity * Time.deltaTime);
     }
 
 }
-
-//2340

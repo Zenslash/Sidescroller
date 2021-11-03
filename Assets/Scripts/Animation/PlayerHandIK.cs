@@ -6,20 +6,30 @@ using UnityEngine;
 
 public class PlayerHandIK : MonoBehaviour
 {
+    #region Components
     private Animator animator;
-
+    [Header("Targets")]
+    [Tooltip("IK target for right hand")]
     [SerializeField] private GameObject rightHandTarget;
-    public GameObject LeftHandTarget;
-    public GameObject LeftHandHint;
-    public GameObject RightHandHint;
-    [SerializeField] [Range(0, 1)] private float LeftHandIKWeight = 0f;
-    [SerializeField] [Range(0, 1)] private float RightHandIKWeight = 0f;
+    [Tooltip("IK target for left hand")]
+    [SerializeField] private GameObject leftHandTarget;
+    [Tooltip("Target for left hand elbow")]
+    [SerializeField] private GameObject leftHandHint;
+    [Tooltip("Target for right hand elbow")]
+    [SerializeField] private GameObject rightHandHint;
+    [Header("Weights")]
+    [SerializeField] [Range(0, 1)] private float leftHandIKWeight = 0f;
+    [SerializeField] [Range(0, 1)] private float rightHandIKWeight = 0f;
 
     public GameObject RightHandTarget
     {
         set => rightHandTarget = value;
     }
-
+    public GameObject LeftHandTarget
+    {
+        set => leftHandTarget = value;
+    }
+    #endregion
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -27,24 +37,24 @@ public class PlayerHandIK : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
-        animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, LeftHandIKWeight);
-        animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, RightHandIKWeight);
-        animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, LeftHandIKWeight);
-        animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, LeftHandIKWeight);
-        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, RightHandIKWeight);
-        animator.SetIKRotationWeight(AvatarIKGoal.RightHand, RightHandIKWeight);
+        animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, leftHandIKWeight);
+        animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, rightHandIKWeight);
+        animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftHandIKWeight);
+        animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftHandIKWeight);
+        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, rightHandIKWeight);
+        animator.SetIKRotationWeight(AvatarIKGoal.RightHand, rightHandIKWeight);
         if (rightHandTarget != null)
         {
-            animator.SetIKHintPosition(AvatarIKHint.RightElbow, RightHandHint.transform.position);
+            animator.SetIKHintPosition(AvatarIKHint.RightElbow, rightHandHint.transform.position);
             animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandTarget.transform.position);
             animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandTarget.transform.rotation);
         }
 
-        if (LeftHandTarget != null)
+        if (leftHandTarget != null)
         {
-            animator.SetIKHintPosition(AvatarIKHint.LeftElbow, LeftHandHint.transform.position);
-            animator.SetIKPosition(AvatarIKGoal.LeftHand, LeftHandTarget.transform.position);
-            animator.SetIKRotation(AvatarIKGoal.LeftHand, LeftHandTarget.transform.rotation);
+            animator.SetIKHintPosition(AvatarIKHint.LeftElbow, leftHandHint.transform.position);
+            animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandTarget.transform.position);
+            animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandTarget.transform.rotation);
         }
         
         

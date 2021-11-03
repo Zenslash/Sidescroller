@@ -3,12 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="253306d8-2c78-4aa7-9d03-9bf5ed6c7777" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/PlayerWIP.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/PlayerWIP.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Animations/PlayerAnimations.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/PlayerWIP.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/PlayerWIP.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/TEMPPlayerWithGun.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/TEMPPlayerWithGun.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Dev/StairsAndMovementTest.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Stairs/ClimbLadder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Stairs/ClimbLadder.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +37,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Movement/PlayerLook.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AF218701-FE32-4032-B521-DDD91F13662B/65/67515257/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Plugins/PlayerInput/PlayerInputManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/MultipleDisplayUtilities.cs" root0="SKIP_HIGHLIGHTING" />
@@ -41,16 +51,17 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/LadderTriger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Attacking/PlayerAttack.cs" />
       <option value="$PROJECT_DIR$/Assets/PlayerStatsManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Camera/CameraFollow.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerLook.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PlayerStatsManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/ClimbLedge.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/ClimbLadder.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1xiQgljmbCk5xEciREFCuqpcI5N" />
@@ -67,7 +78,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -132,6 +143,10 @@
       <workItem from="1634319432935" duration="1987000" />
       <workItem from="1634332858608" duration="3874000" />
       <workItem from="1634381378279" duration="9721000" />
+      <workItem from="1634467896536" duration="7878000" />
+      <workItem from="1634641988349" duration="3285000" />
+      <workItem from="1635845061772" duration="2598000" />
+      <workItem from="1635872925116" duration="6839000" />
     </task>
     <servers />
   </component>
