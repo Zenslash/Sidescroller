@@ -84,7 +84,10 @@ public class PlayerInputHandler : NetworkBehaviour
                 switch (playerInput.currentControlScheme)
                 {
                     case GAMEPAD:
-                        direction = new Vector2(100 * (float)Math.Round((double)context.ReadValue<Vector2>().x, 1), 100 * (float)Math.Round((double)context.ReadValue<Vector2>().y, 2));
+                        //Debug.Log(context.ReadValue<Vector2>());
+                        //direction = new Vector2(100, 100) * context.ReadValue<Vector2>();
+                        direction = new Vector2(100 * context.ReadValue<Vector2>().x, 100 * context.ReadValue<Vector2>().y);
+                        //Debug.Log(context.ReadValue<Vector2>() + " " + direction);
                         break;
                     case KEYMOUSE:
                         //TODO ZIS
@@ -107,6 +110,11 @@ public class PlayerInputHandler : NetworkBehaviour
                     playerStatsManager.Attack.Fire();
             }
         }
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        Debug.Log("InventoryPress");
     }
 
 }
