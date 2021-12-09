@@ -3,9 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="253306d8-2c78-4aa7-9d03-9bf5ed6c7777" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UniGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerLook.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerLook.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/Alts/PolygonApocalypse_Material_01_C.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/Alts/PolygonApocalypse_Material_01_C.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/Alts/PolygonApocalypse_Material_Road_01_Triplanar.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/Alts/PolygonApocalypse_Material_Road_01_Triplanar.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/Misc/PolygonApocalypse_Material_Glass_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/Misc/PolygonApocalypse_Material_Glass_01.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/PolygonApocalypse_Material_01_A.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/PolygonApocalypse_Material_01_A.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/PolygonApocalypse_Material_02_A.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/PolygonApocalypse_Material_02_A.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/PolygonApocalypse_Material_03_A.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Materials/PolygonApocalypse_Material_03_A.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Prefabs/Buildings/SM_Bld_Commercial_Medium_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Prefabs/Buildings/SM_Bld_Commercial_Medium_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Prefabs/Buildings/SM_Bld_Industrial_Large_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/PolygonApocalypse/Prefabs/Buildings/SM_Bld_Industrial_Large_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,10 +31,10 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Movement/PlayerLook.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AF218701-FE32-4032-B521-DDD91F13662B/65/67515257/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AF218701-FE32-4032-B521-DDD91F13662B/a1/be7de49c/Transform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Plugins/PlayerInput/PlayerInputManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AD0A7939-8190-48A0-A161-F66558C98867/ef/f02d1e8f/AvatarIKGoal.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/MultipleDisplayUtilities.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -37,19 +44,15 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/OnStairsTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsEnterTigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/LadderTriger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Attacking/PlayerAttack.cs" />
       <option value="$PROJECT_DIR$/Assets/PlayerStatsManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Camera/CameraFollow.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/PlayerStatsManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/ClimbLedge.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerFootIK.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/ClimbLadder.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerHandIK.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerLook.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/PlayerAnimationStateController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerInputHandler.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Stairs/StairsTrigger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Movement/PlayerMovements.cs" />
+      <option value="$PROJECT_DIR$/Assets/Materials/TestFolder/Soooqa.shader" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1xiQgljmbCk5xEciREFCuqpcI5N" />
@@ -59,14 +62,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.16738895" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.16749585" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+    <property name="settings.editor.selected.configurable" value="RiderCSharpLiveTemplatesSettingsId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -111,31 +113,11 @@
       <workItem from="1631524613143" duration="1374000" />
       <workItem from="1631535697759" duration="2000" />
       <workItem from="1631609907593" duration="5518000" />
-      <workItem from="1631876445132" duration="6669000" />
-      <workItem from="1631972563868" duration="4966000" />
-      <workItem from="1632157453161" duration="455000" />
-      <workItem from="1632222440165" duration="4257000" />
-      <workItem from="1632648754393" duration="2038000" />
-      <workItem from="1632739230046" duration="2409000" />
-      <workItem from="1633001731053" duration="7206000" />
-      <workItem from="1633174645037" duration="7704000" />
-      <workItem from="1633249898052" duration="7265000" />
-      <workItem from="1633350237476" duration="6409000" />
-      <workItem from="1633426948759" duration="16998000" />
-      <workItem from="1633461437703" duration="354000" />
-      <workItem from="1633691003910" duration="922000" />
-      <workItem from="1633860977440" duration="1306000" />
-      <workItem from="1634238943355" duration="1094000" />
-      <workItem from="1634293020517" duration="9510000" />
-      <workItem from="1634317344374" duration="556000" />
-      <workItem from="1634319432935" duration="1987000" />
-      <workItem from="1634332858608" duration="3874000" />
-      <workItem from="1634381378279" duration="9721000" />
-      <workItem from="1634467896536" duration="7878000" />
-      <workItem from="1634641988349" duration="3285000" />
-      <workItem from="1635845061772" duration="2598000" />
-      <workItem from="1635872925116" duration="6839000" />
-      <workItem from="1635923821081" duration="1041000" />
+      <workItem from="1631876445132" duration="6469000" />
+      <workItem from="1636556318403" duration="34000" />
+      <workItem from="1636556700050" duration="2105000" />
+      <workItem from="1636613838210" duration="595000" />
+      <workItem from="1636615281819" duration="401000" />
     </task>
     <servers />
   </component>
